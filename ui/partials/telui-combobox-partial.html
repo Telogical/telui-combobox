@@ -1,0 +1,32 @@
+<div data-ng-id="combobox" class="waffles ui-widget ui-combobox ui-corner-all">
+    <div class="w-12 w-alpha w-omega">
+        <div class="w-12 w-alpha w-omega" for="{{id}}_input">
+            <label class="ui-combobox-label" for="{{id}}_input">{{label}}</label>
+        </div>
+        <div class="w-12 w-alpha w-omega">
+            <div class="ui-combobox-dropdownbutton-frame">
+                <tel-button
+                            id="{{id}}_dropdownbutton"
+                            text="false"
+                            icon-primary="ui-icon-carat-1-s"
+                            class="ui-combobox-dropdownbutton"
+                            click="dropdownButton()"
+                            tabindex="-1"
+                            ></tel-button>
+            </div>
+            <div class="ui-combobox-input-frame w-v-1">
+                <!--[if lte IE 9]>
+                <div
+                     class="ui-shim-placeholder-frame"
+                     data-ng-show="isEmpty"
+                     data-ng-click="focusInput()"
+                      >
+                    <div class="ui-shim-placeholder" >{{placeholder}}</div>
+                </div>
+                <![endif]-->
+
+                <input id="{{id}}_input"  class="ui-combobox-input" placeholder="{{placeholder}}"/>
+            </div>
+        </div>
+    </div>
+</div>

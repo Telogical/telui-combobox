@@ -1,13 +1,22 @@
 {
-    "name": "TelUI-combobox",
+    "name": "Telui-Combobox",
     "version": "0.0.1",
     "private": true,
-
     "dependencies": {
-
+        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core",
+        "partialify": "*"
     },
-
     "devDependencies": {
-        "lodash":"*"
+        "lodash": "*",
+        "browserify": "*",
+        "browserify-shim": "*"
+    },
+    "scripts": {
+        "install": "browserify src/telui.combobox.js -o index.js"
+    },
+    "browserify": {
+        "transform": [
+            "partialify"
+        ]
     }
 }

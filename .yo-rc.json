@@ -1,0 +1,8 @@
+{
+  "generator-telui": {
+    "componentName": "Telui-Combobox",
+    "initialVersion": "0.0.1",
+    "telUiComponents": [],
+    "useTelQ": false
+  }
+}
