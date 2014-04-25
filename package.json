@@ -1,6 +1,6 @@
 {
     "name": "TelUI-Combobox",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "private": true,
     "dependencies": {
         "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core",
