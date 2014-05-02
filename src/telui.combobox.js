@@ -1,29 +1,18 @@
 // creative the directives as re-usable components
+// TODO: Require the placeholder shim
 require('TelUI-Core');
+require('TelUI-Form');
+require('TelUI-Core/lib/jquery-ui/jquery.ui.button.js');
+require('TelUI-Core/lib/jquery-ui/jquery.ui.menu.js');
+require('TelUI-Core/lib/jquery-ui/jquery.ui.autocomplete.js');
 var TelogicalUi = angular.module('TelUI');
 
 TelogicalUi
     .directive('teluiCombobox', ['$http', '$templateCache',
         function ($http, $templateCache) {
             'use strict';
-            return {
-                restrict: 'E',
-                require: '',
-                template: require('../ui/partials/telui-combobox-partial.html'),
-                replace: true,
-                transclude: false,
-                scope: {
-                    'id': '@',
-                    'data': '=?',
-                    'ngDisabled': '=?',
-                    'value': '=?',
-                    'label': '@',
-                    'labelProp': '@',
-                    'maxHeight': '@',
-                    'placeholder': '@',
-
-                },
-                link: function ($scope, $element) {
+			
+			function link($scope, $element) {
                     //TODO: switch _input and _button with $input and $button
 
                     var initialized = false,
@@ -246,6 +235,24 @@ TelogicalUi
 
                     setTimeout(init);
                 }
+			
+			return {
+                restrict: 'E',
+                require: '',
+                template: require('../ui/partials/telui-combobox-partial.html'),
+                replace: true,
+                transclude: false,
+                scope: {
+                    'id': '@',
+                    'data': '=?',
+                    'ngDisabled': '=?',
+                    'value': '=?',
+                    'label': '@',
+                    'labelProp': '@',
+                    'maxHeight': '@',
+                    'placeholder': '@'
+                },
+                link: link
             };
         }
     ]);
