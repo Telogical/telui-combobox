@@ -154,10 +154,11 @@ TelogicalUi
 
                     _input = $element.find('input:first');
                     _button = $element.find('.ui-button');
-                    _input
-                        .autocomplete('search', '')
-                        .autocomplete('close');
-
+                    if (_input.hasClass('ui-autocomplete-input')) {
+                        _input
+                            .autocomplete('search', '')
+                            .autocomplete('close');
+                    }
                     _button.blur();
 
                     if ($scope.staleValue) {
