@@ -1,6 +1,6 @@
 {
-    "name": "TelUI-Combobox",
-    "version": "0.0.2",
+    "name": "TelUI-ComboBox",
+    "version": "0.0.3",
     "private": true,
     "dependencies": {
         "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core",
@@ -8,8 +8,8 @@
     },
     "devDependencies": {
         "lodash": "*",
-        "browserify": "*",
-        "browserify-shim": "*"
+		"browserify": "3.46.0",
+		"browserify-shim": "3.x.x"
     },
     "browserify": {
         "transform": [
