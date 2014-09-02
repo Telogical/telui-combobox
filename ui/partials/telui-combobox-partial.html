@@ -16,21 +16,16 @@
                 </telui-button>
             </div>
             <div class="ui-combobox-input-frame w-v-1">
-                <div data-ng-if="isIE">
-                    <div
-                            class="ui-shim-placeholder-frame"
-                            data-ng-show="isEmpty"
-                            data-ng-click="focusInput()"
-                            >
-                        <div class="ui-shim-placeholder">{{placeholder}}</div>
-                    </div>
-
-                    <input id="{{id}}_input" class="ui-combobox-input"/>
+                <div
+                        id="{{id}}_placeholder_frame"
+                        class="ui-shim-placeholder-frame"
+                        data-ng-show="isEmpty"
+                        data-ng-click="focusInput()"
+                        data-role="placeholder"
+                        >
+                    <div id="{{id}}_placeholder" class="ui-shim-placeholder">{{placeholder}}</div>
                 </div>
-
-                <div data-ng-if="!isIE">
-                    <input id="{{id}}_input" class="ui-combobox-input" placeholder="{{placeholder}}"/>
-                </div>
+                <input id="{{id}}_input" class="ui-combobox-input"/>
             </div>
         </div>
     </div>

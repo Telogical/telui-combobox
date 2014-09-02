@@ -12,13 +12,6 @@ TelogicalUi
         function ($http, $templateCache) {
             'use strict';
 
-            function isIE() {
-                var ua = window.navigator.userAgent;
-                var msie = ua.indexOf("MSIE ");
-
-                return (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./));
-              }
-
             function link($scope, $element) {
                 //TODO: switch _input and _button with $input and $button
 
@@ -227,7 +220,6 @@ TelogicalUi
                     });
                 }
 
-                $scope.isIE = isIE();
                 $scope.data = $scope.data || [];
                 $scope.value = $scope.value || '';
                 $scope.placeholder = $scope.placeholder || '';
