@@ -16,7 +16,7 @@
                 </telui-button>
             </div>
             <div class="ui-combobox-input-frame w-v-1">
-                <div data-ng-if="isIE()">
+                <div data-ng-if="isIE">
                     <div
                             class="ui-shim-placeholder-frame"
                             data-ng-show="isEmpty"
@@ -28,7 +28,7 @@
                     <input id="{{id}}_input" class="ui-combobox-input"/>
                 </div>
 
-                <div data-ng-if="!isIE()">
+                <div data-ng-if="!isIE">
                     <input id="{{id}}_input" class="ui-combobox-input" placeholder="{{placeholder}}"/>
                 </div>
             </div>

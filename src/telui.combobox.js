@@ -227,13 +227,13 @@ TelogicalUi
                     });
                 }
 
+                $scope.isIE = isIE();
                 $scope.data = $scope.data || [];
                 $scope.value = $scope.value || '';
                 $scope.placeholder = $scope.placeholder || '';
                 $scope.dropdownButton = dropdownButton;
                 $scope.focusInput = focusInput;
                 $scope.isEmpty = true;
-                $scope.isIE = isIE;
 
                 $scope.$watch('data', updateData, true);
                 $scope.$watch('value', updateValue, true);
