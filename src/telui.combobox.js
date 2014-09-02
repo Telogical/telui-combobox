@@ -12,6 +12,13 @@ TelogicalUi
         function ($http, $templateCache) {
             'use strict';
 
+            function isIE() {
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                return (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./));
+              }
+
             function link($scope, $element) {
                 //TODO: switch _input and _button with $input and $button
 
@@ -49,8 +56,7 @@ TelogicalUi
                         source: prepareData($scope.data),
                         select: select,
                         focus: focus,
-                        open: open,
-
+                        open: open
                     };
 
                     initialized =
@@ -227,6 +233,7 @@ TelogicalUi
                 $scope.dropdownButton = dropdownButton;
                 $scope.focusInput = focusInput;
                 $scope.isEmpty = true;
+                $scope.isIE = isIE;
 
                 $scope.$watch('data', updateData, true);
                 $scope.$watch('value', updateValue, true);
