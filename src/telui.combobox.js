@@ -49,8 +49,7 @@ TelogicalUi
                         source: prepareData($scope.data),
                         select: select,
                         focus: focus,
-                        open: open,
-
+                        open: open
                     };
 
                     initialized =
