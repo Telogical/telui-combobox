@@ -7,6 +7,8 @@ require('TelUI-Core/lib/jquery-ui/jquery.ui.menu.js');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.autocomplete.js');
 var TelogicalUi = angular.module('TelUI');
 
+console.log('I have been modified');
+
 TelogicalUi
     .directive('teluiCombobox', ['$http', '$templateCache',
         function ($http, $templateCache) {
@@ -126,12 +128,14 @@ TelogicalUi
                 }
 
                 function updateEnablement(value) {
+
+                    console.log('value being passed in is', typeof value, value);
                     value =
-                        (value == true || value == 'true') ?
+                        (value === true || value === 'true') ?
                         true :
                         false;
 
-                    _input = $element.find('input:first');
+                    _input = $element.find('input:first, .ui-combobox-input');
                     _button = $element.find('.ui-button');
 
                     _input.prop('disabled', value);
@@ -229,7 +233,7 @@ TelogicalUi
 
                 $scope.$watch('data', updateData, true);
                 $scope.$watch('value', updateValue, true);
-                $scope.$watch('ngDisabled', updateEnablement, true);
+                $scope.$watch('disabled', updateEnablement, true);
 
                 setTimeout(init);
             }
@@ -243,7 +247,7 @@ TelogicalUi
                 scope: {
                     'id': '@',
                     'data': '=?',
-                    'ngDisabled': '=?',
+                    'disabled': '=',
                     'value': '=?',
                     'label': '@',
                     'labelProp': '@',
