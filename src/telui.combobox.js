@@ -136,13 +136,13 @@ TelogicalUi
                     _button = $element.find('.ui-button');
 
                     _input.prop('disabled', value);
-                    _button.prop('disabled', value);
+                    _button.button().prop('disabled', value);
                     if (value) {
                         _input.autocomplete('disable');
-                        _button.button('disable');
+                        _button.button().button('disable');
                     } else {
                         _input.autocomplete('enable');
-                        _button.button('enable');
+                        _button.button().button('enable');
                     }
                 }
 
