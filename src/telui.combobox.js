@@ -21,7 +21,7 @@ TelogicalUi
 
                 function init() {
                     _input = $element.find('input:first');
-                    _button = $element.find('.ui-button');
+                    _button = $element.find('.ui-button, .ui.widget.ui-button');
 
                     function select(eve, ui) {
                         $scope.$apply(function () {
