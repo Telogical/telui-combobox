@@ -126,22 +126,23 @@ TelogicalUi
                 }
 
                 function updateEnablement(value) {
+
                     value =
-                        (value == true || value == 'true') ?
+                        (value === true || value === 'true') ?
                         true :
                         false;
 
-                    _input = $element.find('input:first');
+                    _input = $element.find('input:first, .ui-combobox-input');
                     _button = $element.find('.ui-button');
 
                     _input.prop('disabled', value);
-                    _button.prop('disabled', value);
+                    _button.button().prop('disabled', value);
                     if (value) {
                         _input.autocomplete('disable');
-                        _button.button('disable');
+                        _button.button().button('disable');
                     } else {
                         _input.autocomplete('enable');
-                        _button.button('enable');
+                        _button.button().button('enable');
                     }
                 }
 
@@ -229,7 +230,7 @@ TelogicalUi
 
                 $scope.$watch('data', updateData, true);
                 $scope.$watch('value', updateValue, true);
-                $scope.$watch('ngDisabled', updateEnablement, true);
+                $scope.$watch('disabled', updateEnablement, true);
 
                 setTimeout(init);
             }
@@ -243,7 +244,7 @@ TelogicalUi
                 scope: {
                     'id': '@',
                     'data': '=?',
-                    'ngDisabled': '=?',
+                    'disabled': '=',
                     'value': '=?',
                     'label': '@',
                     'labelProp': '@',
