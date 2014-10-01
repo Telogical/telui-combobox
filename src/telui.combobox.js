@@ -15,16 +15,12 @@ TelogicalUi
 
             function link($scope, $element) {
 
-
-                //TODO: switch _input and // TODO: replace this _button with $input and $button
-
                 var initialized = false,
                     _input = $element.find('input:first'),
-                    // TODO: replace this _button = $element.find('.ui-button');
+					$dropDownButtonFrame = $element.find('.ui-combobox-dropdownbutton-frame');
 
                 function init() {
                     _input = $element.find('input:first');
-                    // TODO: replace this _button = $element.find('.ui-button, .ui.widget.ui-button');
 
                     function select(eve, ui) {
                         $scope.$apply(function () {
@@ -59,7 +55,7 @@ TelogicalUi
                         _input
                         .autocomplete(autoCompleteOptions);
 
-                    // TODO: replace this _button
+                    $dropDownButtonFrame 
                         .off('.combobox')
                         .on('click.combobox', dropdownButton);
 
@@ -137,16 +133,12 @@ TelogicalUi
                         false;
 
                     _input = $element.find('input:first, .ui-combobox-input');
-                    // TODO: replace this _button = $element.find('.ui-button');
 
                     _input.prop('disabled', value);
-                    // TODO: replace this _button.button().prop('disabled', value);
                     if (value) {
                         _input.autocomplete('disable');
-                        // TODO: replace this _button.button().button('disable');
                     } else {
                         _input.autocomplete('enable');
-                        // TODO: replace this _button.button().button('enable');
                     }
                 }
 
@@ -157,13 +149,11 @@ TelogicalUi
                 function closeSelect(eve, target) {
 
                     _input = $element.find('input:first');
-                    // TODO: replace this _button = $element.find('.ui-button');
                     if (_input.hasClass('ui-autocomplete-input')) {
                         _input
                             .autocomplete('search', '')
                             .autocomplete('close');
                     }
-                    // TODO: replace this _button.blur();
 
                     if ($scope.staleValue) {
                         _input.val($scope.staleValue);
@@ -179,7 +169,6 @@ TelogicalUi
                 function dropdownButton() {
                     function clickEvent() {
                         _input = $element.find('input:first');
-                        // TODO: replace this _button = $element.find('.ui-button');
                         if (_input.autocomplete('widget').is(':visible')) {
                             closeSelect();
                             return;
@@ -192,9 +181,6 @@ TelogicalUi
                             .keydown()
                             .autocomplete('search', '')
                             .autocomplete('widget');
-
-                        // TODO: replace this _button
-                            .focus();
 
                         $scope.$apply(function () {
                             $scope.isEmpty = !_input.val().length;
@@ -216,7 +202,6 @@ TelogicalUi
                             .click();
 
                         _input.autocomplete('close');
-                        // TODO: replace this _button.blur();
                     }
 
                     setTimeout(function evaluateIsEmpty() {
@@ -225,7 +210,7 @@ TelogicalUi
                     });
                 }
 
-				function createReactButton() {
+				function renderReactButton() {
 					var buttonModel = {
 						scope: $scope,
 						id: $scope.id + '_dropdownbutton',
@@ -236,13 +221,12 @@ TelogicalUi
 						click: function() { console.log('youclickedthereactbutton');}
 					};
 
-					return UI.Button(buttonModel);
+					// We need this in the scope later on so we can set events.
+					var generatedReactButton = UI.Button(buttonModel);
+					//$scope.generatedReactButton = generatedReactButton;
+
+					React.renderComponent(generatedReactButton, $dropDownButtonFrame[0]);
 				}
-
-				var generatedReactButton = createReactButton();
-				var $dropDownButtonFrame = $element.find('.ui-combobox-dropdownbutton-frame');
-
-				React.renderComponent(generatedReactButton, $dropDownButtonFrame[0]);
 
                 $scope.data = $scope.data || [];
                 $scope.value = $scope.value || '';
@@ -255,6 +239,7 @@ TelogicalUi
                 $scope.$watch('value', updateValue, true);
                 $scope.$watch('disabled', updateEnablement, true);
 
+				$scope.$watchCollection('[label, iconPrimary, iconSecondary, disabled, cssClass, text, click, appearance, orientation]', renderReactButton);
                 setTimeout(init);
             }
 
