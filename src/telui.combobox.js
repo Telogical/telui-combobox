@@ -1,7 +1,8 @@
 // creative the directives as re-usable components
 // TODO: Require the placeholder shim
+var React = require('react/addons');
 require('TelUI-Core');
-require('TelUI-Form');
+var UI = require('TelUI-Form');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.button.js');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.menu.js');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.autocomplete.js');
@@ -13,15 +14,17 @@ TelogicalUi
             'use strict';
 
             function link($scope, $element) {
-                //TODO: switch _input and _button with $input and $button
+
+
+                //TODO: switch _input and // TODO: replace this _button with $input and $button
 
                 var initialized = false,
                     _input = $element.find('input:first'),
-                    _button = $element.find('.ui-button');
+                    // TODO: replace this _button = $element.find('.ui-button');
 
                 function init() {
                     _input = $element.find('input:first');
-                    _button = $element.find('.ui-button, .ui.widget.ui-button');
+                    // TODO: replace this _button = $element.find('.ui-button, .ui.widget.ui-button');
 
                     function select(eve, ui) {
                         $scope.$apply(function () {
@@ -56,7 +59,7 @@ TelogicalUi
                         _input
                         .autocomplete(autoCompleteOptions);
 
-                    _button
+                    // TODO: replace this _button
                         .off('.combobox')
                         .on('click.combobox', dropdownButton);
 
@@ -67,6 +70,7 @@ TelogicalUi
                     $('body')
                         .on('click.combobox', closeSelect);
                 }
+
 
                 function prepareData(data) {
                     var _data = $.extend(true, [], data);
@@ -133,16 +137,16 @@ TelogicalUi
                         false;
 
                     _input = $element.find('input:first, .ui-combobox-input');
-                    _button = $element.find('.ui-button');
+                    // TODO: replace this _button = $element.find('.ui-button');
 
                     _input.prop('disabled', value);
-                    _button.button().prop('disabled', value);
+                    // TODO: replace this _button.button().prop('disabled', value);
                     if (value) {
                         _input.autocomplete('disable');
-                        _button.button().button('disable');
+                        // TODO: replace this _button.button().button('disable');
                     } else {
                         _input.autocomplete('enable');
-                        _button.button().button('enable');
+                        // TODO: replace this _button.button().button('enable');
                     }
                 }
 
@@ -153,13 +157,13 @@ TelogicalUi
                 function closeSelect(eve, target) {
 
                     _input = $element.find('input:first');
-                    _button = $element.find('.ui-button');
+                    // TODO: replace this _button = $element.find('.ui-button');
                     if (_input.hasClass('ui-autocomplete-input')) {
                         _input
                             .autocomplete('search', '')
                             .autocomplete('close');
                     }
-                    _button.blur();
+                    // TODO: replace this _button.blur();
 
                     if ($scope.staleValue) {
                         _input.val($scope.staleValue);
@@ -175,7 +179,7 @@ TelogicalUi
                 function dropdownButton() {
                     function clickEvent() {
                         _input = $element.find('input:first');
-                        _button = $element.find('.ui-button');
+                        // TODO: replace this _button = $element.find('.ui-button');
                         if (_input.autocomplete('widget').is(':visible')) {
                             closeSelect();
                             return;
@@ -189,7 +193,7 @@ TelogicalUi
                             .autocomplete('search', '')
                             .autocomplete('widget');
 
-                        _button
+                        // TODO: replace this _button
                             .focus();
 
                         $scope.$apply(function () {
@@ -212,7 +216,7 @@ TelogicalUi
                             .click();
 
                         _input.autocomplete('close');
-                        _button.blur();
+                        // TODO: replace this _button.blur();
                     }
 
                     setTimeout(function evaluateIsEmpty() {
@@ -220,6 +224,25 @@ TelogicalUi
                         $scope.$apply();
                     });
                 }
+
+				function createReactButton() {
+					var buttonModel = {
+						scope: $scope,
+						id: $scope.id + '_dropdownbutton',
+						text: false,
+						iconPrimary: 'ui-icon-carat-1-s',
+						cssClass: 'ui-combobox-dropdownbutton',
+						disabled: $scope.disabled,
+						click: function() { console.log('youclickedthereactbutton');}
+					};
+
+					return UI.Button(buttonModel);
+				}
+
+				var generatedReactButton = createReactButton();
+				var $dropDownButtonFrame = $element.find('.ui-combobox-dropdownbutton-frame');
+
+				React.renderComponent(generatedReactButton, $dropDownButtonFrame[0]);
 
                 $scope.data = $scope.data || [];
                 $scope.value = $scope.value || '';
