@@ -15,12 +15,14 @@ TelogicalUi
 
             function link($scope, $element) {
 
+				var inputSelector = '.ui-combobox-input';
+
                 var initialized = false,
-                    _input = $element.find('input:first'),
+                    _input = $element.find(inputSelector),
 					$dropDownButtonFrame = $element.find('.ui-combobox-dropdownbutton-frame');
 
                 function init() {
-                    _input = $element.find('input:first');
+                    _input = $element.find(inputSelector);
 
                     function select(eve, ui) {
                         $scope.$apply(function () {
@@ -126,13 +128,12 @@ TelogicalUi
                 }
 
                 function updateEnablement(value) {
-
                     value =
                         (value === true || value === 'true') ?
                         true :
                         false;
 
-                    _input = $element.find('input:first, .ui-combobox-input');
+                    _input = $element.find(inputSelector);
 
                     _input.prop('disabled', value);
                     if (value) {
@@ -147,8 +148,7 @@ TelogicalUi
                 }
 
                 function closeSelect(eve, target) {
-
-                    _input = $element.find('input:first');
+                    _input = $element.find(inputSelector);
                     if (_input.hasClass('ui-autocomplete-input')) {
                         _input
                             .autocomplete('search', '')
@@ -168,8 +168,8 @@ TelogicalUi
 
                 function dropdownButton() {
                     function clickEvent() {
-                        _input = $element.find('input:first');
-                        if (_input.autocomplete('widget').is(':visible')) {
+                        _input = $element.find(inputSelector);
+                        if (_input.autocomplete().autocomplete('widget').is(':visible')) {
                             closeSelect();
                             return;
                         }
@@ -218,7 +218,7 @@ TelogicalUi
 						iconPrimary: 'ui-icon-carat-1-s',
 						cssClass: 'ui-combobox-dropdownbutton',
 						disabled: $scope.disabled,
-						click: function() { console.log('youclickedthereactbutton');}
+						click: dropdownButton
 					};
 
 					// We need this in the scope later on so we can set events.
