@@ -8,6 +8,8 @@ require('TelUI-Core/lib/jquery-ui/jquery.ui.menu.js');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.autocomplete.js');
 var TelogicalUi = angular.module('TelUI');
 
+console.log('i am a combobox');
+
 TelogicalUi
     .directive('teluiCombobox', ['$http', '$templateCache',
         function ($http, $templateCache) {
