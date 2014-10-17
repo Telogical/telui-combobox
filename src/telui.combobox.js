@@ -1,11 +1,14 @@
 // creative the directives as re-usable components
 // TODO: Require the placeholder shim
+var React = require('react/addons');
 require('TelUI-Core');
-require('TelUI-Form');
+var UI = require('TelUI-Form');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.button.js');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.menu.js');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.autocomplete.js');
 var TelogicalUi = angular.module('TelUI');
+
+console.log('i am a combobox');
 
 TelogicalUi
     .directive('teluiCombobox', ['$http', '$templateCache',
@@ -13,15 +16,15 @@ TelogicalUi
             'use strict';
 
             function link($scope, $element) {
-                //TODO: switch _input and _button with $input and $button
+
+				var inputSelector = '.ui-combobox-input';
 
                 var initialized = false,
-                    _input = $element.find('input:first'),
-                    _button = $element.find('.ui-button');
+                    _input = $element.find(inputSelector),
+					$dropDownButtonFrame = $element.find('.ui-combobox-dropdownbutton-frame');
 
                 function init() {
-                    _input = $element.find('input:first');
-                    _button = $element.find('.ui-button');
+                    _input = $element.find(inputSelector);
 
                     function select(eve, ui) {
                         $scope.$apply(function () {
@@ -56,7 +59,7 @@ TelogicalUi
                         _input
                         .autocomplete(autoCompleteOptions);
 
-                    _button
+                    $dropDownButtonFrame 
                         .off('.combobox')
                         .on('click.combobox', dropdownButton);
 
@@ -67,6 +70,7 @@ TelogicalUi
                     $('body')
                         .on('click.combobox', closeSelect);
                 }
+
 
                 function prepareData(data) {
                     var _data = $.extend(true, [], data);
@@ -127,21 +131,17 @@ TelogicalUi
 
                 function updateEnablement(value) {
                     value =
-                        (value == true || value == 'true') ?
+                        (value === true || value === 'true') ?
                         true :
                         false;
 
-                    _input = $element.find('input:first');
-                    _button = $element.find('.ui-button');
+                    _input = $element.find(inputSelector);
 
                     _input.prop('disabled', value);
-                    _button.prop('disabled', value);
                     if (value) {
                         _input.autocomplete('disable');
-                        _button.button('disable');
                     } else {
                         _input.autocomplete('enable');
-                        _button.button('enable');
                     }
                 }
 
@@ -150,15 +150,12 @@ TelogicalUi
                 }
 
                 function closeSelect(eve, target) {
-
-                    _input = $element.find('input:first');
-                    _button = $element.find('.ui-button');
+                    _input = $element.find(inputSelector);
                     if (_input.hasClass('ui-autocomplete-input')) {
                         _input
                             .autocomplete('search', '')
                             .autocomplete('close');
                     }
-                    _button.blur();
 
                     if ($scope.staleValue) {
                         _input.val($scope.staleValue);
@@ -173,9 +170,8 @@ TelogicalUi
 
                 function dropdownButton() {
                     function clickEvent() {
-                        _input = $element.find('input:first');
-                        _button = $element.find('.ui-button');
-                        if (_input.autocomplete('widget').is(':visible')) {
+                        _input = $element.find(inputSelector);
+                        if (_input.autocomplete().autocomplete('widget').is(':visible')) {
                             closeSelect();
                             return;
                         }
@@ -187,9 +183,6 @@ TelogicalUi
                             .keydown()
                             .autocomplete('search', '')
                             .autocomplete('widget');
-
-                        _button
-                            .focus();
 
                         $scope.$apply(function () {
                             $scope.isEmpty = !_input.val().length;
@@ -211,7 +204,6 @@ TelogicalUi
                             .click();
 
                         _input.autocomplete('close');
-                        _button.blur();
                     }
 
                     setTimeout(function evaluateIsEmpty() {
@@ -219,6 +211,24 @@ TelogicalUi
                         $scope.$apply();
                     });
                 }
+
+				function renderReactButton() {
+					var buttonModel = {
+						scope: $scope,
+						id: $scope.id + '_dropdownbutton',
+						text: false,
+						iconPrimary: 'ui-icon-carat-1-s',
+						cssClass: 'ui-combobox-dropdownbutton',
+						disabled: $scope.disabled,
+						click: dropdownButton
+					};
+
+					// We need this in the scope later on so we can set events.
+					var generatedReactButton = UI.Button(buttonModel);
+					//$scope.generatedReactButton = generatedReactButton;
+
+					React.renderComponent(generatedReactButton, $dropDownButtonFrame[0]);
+				}
 
                 $scope.data = $scope.data || [];
                 $scope.value = $scope.value || '';
@@ -229,8 +239,9 @@ TelogicalUi
 
                 $scope.$watch('data', updateData, true);
                 $scope.$watch('value', updateValue, true);
-                $scope.$watch('ngDisabled', updateEnablement, true);
+                $scope.$watch('disabled', updateEnablement, true);
 
+				$scope.$watchCollection('[label, iconPrimary, iconSecondary, disabled, cssClass, text, click, appearance, orientation]', renderReactButton);
                 setTimeout(init);
             }
 
@@ -243,7 +254,7 @@ TelogicalUi
                 scope: {
                     'id': '@',
                     'data': '=?',
-                    'ngDisabled': '=?',
+                    'disabled': '=',
                     'value': '=?',
                     'label': '@',
                     'labelProp': '@',
