@@ -3,7 +3,7 @@
     "version": "0.0.8",
     "private": true,
     "dependencies": {
-        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core",
+        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core.git#rules-author",
         "partialify": "*"
     },
     "devDependencies": {
