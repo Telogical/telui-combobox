@@ -8,8 +8,6 @@ require('TelUI-Core/lib/jquery-ui/jquery.ui.menu.js');
 require('TelUI-Core/lib/jquery-ui/jquery.ui.autocomplete.js');
 var TelogicalUi = angular.module('TelUI');
 
-console.log('i am a combobox');
-
 TelogicalUi
     .directive('teluiCombobox', ['$http', '$templateCache',
         function ($http, $templateCache) {
@@ -130,12 +128,19 @@ TelogicalUi
                 }
 
                 function updateEnablement(value) {
+					console.log('raw value', value);
+					console.log('type is', typeof value);
+
                     value =
                         (value === true || value === 'true') ?
                         true :
                         false;
 
                     _input = $element.find(inputSelector);
+
+					console.log('selector is ', inputSelector);
+					console.log('setting value', value);
+					console.log('updating element', _input);
 
                     _input.prop('disabled', value);
                     if (value) {
@@ -229,6 +234,8 @@ TelogicalUi
 
 					React.renderComponent(generatedReactButton, $dropDownButtonFrame[0]);
 				}
+
+				console.log('scope received', $scope);
 
                 $scope.data = $scope.data || [];
                 $scope.value = $scope.value || '';
