@@ -1,10 +1,11 @@
 {
     "name": "TelUI-ComboBox",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "private": true,
     "dependencies": {
         "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core.git#rules-author",
-        "partialify": "*"
+        "partialify": "*",
+		"react": "0.11.x" 
     },
     "devDependencies": {
         "lodash": "*",
