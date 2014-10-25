@@ -110,8 +110,10 @@ TelogicalUi
           $ul
             .css({
               'max-height': $scope.maxHeight || '100%',
-              'overflow': 'auto'
-            });
+              'overflow': 'auto',
+              'width': _input.width()
+            })
+            .addClass('ui-state-' + $scope.state);
 
           setTimeout(function () {
             $(window).resize();
