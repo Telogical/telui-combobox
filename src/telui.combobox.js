@@ -230,7 +230,34 @@ TelogicalUi
 
           React.renderComponent(generatedReactButton, $dropDownButtonFrame[0]);
         }
+        
+        function updateState(){
+          $scope.state = $scope.state || 'default';
+        }
+        
+        function hoverIn() {
+          $scope.interact = 'hover';
+        }
+        
+        function hoverOut() {
+          $scope.interact = 'default';
+        }
+        
+        function focus() {
+          $scope.interact = 'focus';
+        }
 
+        function blur() {
+          $scope.interact = 'default';
+        }
+        
+
+        $scope.interact = 'default';
+        $scope.hoverIn= hoverIn;
+        $scope.hoverOut = hoverOut;
+        $scope.focus = focus;
+        $scope.blur = blur;
+        
         $scope.data = $scope.data || [];
         $scope.value = $scope.value || '';
         $scope.placeholder = $scope.placeholder || '';
@@ -241,7 +268,9 @@ TelogicalUi
         $scope.$watch('data', updateData, true);
         $scope.$watch('value', updateValue, true);
         $scope.$watch('disabled', updateEnablement, true);
-
+        $scope.$watch('state', updateState);
+        
+        
         $scope.$watchCollection('[label, iconPrimary, iconSecondary, disabled, cssClass, text, click, appearance, orientation]', renderReactButton);
         setTimeout(init);
       }

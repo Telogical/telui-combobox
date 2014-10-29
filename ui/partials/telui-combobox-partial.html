@@ -1,7 +1,15 @@
 <div data-ng-id="combobox" class="waffles">
-    <div class="ui-widget ui-combobox ui-state-{{state}}">
+    <div class="ui-widget ui-combobox ui-state-{{state}} ui-state-default"
+         ng-mouseenter="hoverIn()" 
+         ng-mouseleave="hoverOut()"
+         ng-class="{'ui-state-hover': interact=='hover', 'ui-state-active': interact=='focus'}"
+         >
         <div class="w-12 w-alpha w-omega" for="{{id}}_input">
-            <label class="ui-combobox-label" for="{{id}}_input">{{label}}</label>
+            <label 
+                   class="ui-combobox-label ui-state-default" 
+                   for="{{id}}_input"
+                   ng-class="{'ui-state-hover': interact=='hover', 'ui-state-active': interact=='focus'}"
+                   >{{label}}</label>
         </div>
         <div class="w-12 w-alpha w-omega">
             <div class="ui-combobox-dropdownbutton-frame">
@@ -17,7 +25,13 @@
                         >
                     <div id="{{id}}_placeholder" class="ui-shim-placeholder">{{placeholder}}</div>
                 </div>
-                <input id="{{id}}_input" class="ui-combobox-input"/>
+                <input 
+                       id="{{id}}_input" 
+                       class="ui-combobox-input ui-state-default"
+                       ng-class="{'ui-state-hover': interact=='hover', 'ui-state-active': interact=='focus'}"
+                       ng-focus="focus()" 
+                       ng-blur="blur()"
+                       />
             </div>
         </div>
     </div>
