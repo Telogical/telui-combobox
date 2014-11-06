@@ -110,6 +110,7 @@ TelogicalUi
           $ul
             .css({
               'max-height': $scope.maxHeight || '100%',
+              'max-width': $scope.maxWidth || '100%',
               'overflow': 'auto',
               'width': _input.width()
             })
@@ -289,6 +290,7 @@ TelogicalUi
           'label': '@',
           'labelProp': '@',
           'maxHeight': '@',
+          'maxWidth': '@',
           'placeholder': '@',
           'state': '@'
         },
