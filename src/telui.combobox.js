@@ -10,8 +10,8 @@ var TelogicalUi = angular.module('TelUI');
 
 
 TelogicalUi
-  .directive('teluiCombobox', ['$http', '$templateCache',
-      function ($http, $templateCache) {
+  .directive('teluiCombobox', ['$http', '$templateCache', 'TelUIValidate',
+      function ($http, $templateCache, TelUIValidate) {
       'use strict';
 
       function link($scope, $element) {
@@ -44,6 +44,9 @@ TelogicalUi
               });
             }
           }
+
+          TelUIValidate.buildValidators($scope);
+          TelUIValidate.validate($scope);
 
           var autoCompleteOptions = {
             delay: 0,
@@ -125,6 +128,7 @@ TelogicalUi
           $scope.value = val;
           if (val && typeof val === 'object') {
             _input.val(val[$scope.labelProp]);
+            TelUIValidate.validate($scope);
           } else {
             _input.val(val);
           }
@@ -276,24 +280,28 @@ TelogicalUi
         setTimeout(init);
       }
 
+      var scopeObj = {
+        'id': '@',
+        'data': '=?',
+        'disabled': '=',
+        'value': '=?',
+        'label': '@',
+        'labelProp': '@',
+        'maxHeight': '@',
+        'maxWidth': '@',
+        'placeholder': '@',
+        'state': '@'
+      };
+
+      TelUIValidate.attach(scopeObj);
+
       return {
         restrict: 'E',
         require: '',
+        scope: scopeObj,
         template: require('../ui/partials/telui-combobox-partial.html'),
         replace: true,
         transclude: false,
-        scope: {
-          'id': '@',
-          'data': '=?',
-          'disabled': '=',
-          'value': '=?',
-          'label': '@',
-          'labelProp': '@',
-          'maxHeight': '@',
-          'maxWidth': '@',
-          'placeholder': '@',
-          'state': '@'
-        },
         link: link
       };
     }
