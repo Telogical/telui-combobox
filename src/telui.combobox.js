@@ -223,7 +223,7 @@ TelogicalUi
             scope: $scope,
             id: $scope.id + '_dropdownbutton',
             text: false,
-            iconPrimary: 'ui-icon-carat-1-s',
+            iconPrimary: $scope.iconPrimary || 'ui-icon-carat-1-s',
             cssClass: 'ui-combobox-dropdownbutton',
             disabled: $scope.disabled,
             click: dropdownButton
@@ -285,6 +285,7 @@ TelogicalUi
         'data': '=?',
         'disabled': '=',
         'value': '=?',
+        'iconPrimary': '@',
         'label': '@',
         'labelProp': '@',
         'maxHeight': '@',
