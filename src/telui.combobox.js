@@ -10,7 +10,7 @@ var TelogicalUi = angular.module('TelUI');
 
 
 TelogicalUi
-    .directive('teluiCombobox', ['$http', '$templateCache','TelUIValidate'
+    .directive('teluiCombobox', ['$http', '$templateCache','TelUIValidate',
       function ($http, $templateCache, TelUIValidate) {
             'use strict';
 
