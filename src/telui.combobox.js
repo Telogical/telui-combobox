@@ -200,6 +200,13 @@ TelogicalUi
                 }
 
                 function keydown(eve) {
+                    
+                    _input = _input || $element.find(inputSelector);
+                    
+                     if (!_input.hasClass('ui-autocomplete-input')){
+                        return;
+                     }
+                    
                     if (eve.which === 13 && _input.autocomplete('widget').is(':visible')) {
                         _input
                             .autocomplete('widget')
