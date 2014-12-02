@@ -10,8 +10,8 @@ var TelogicalUi = angular.module('TelUI');
 
 
 TelogicalUi
-    .directive('teluiCombobox', ['$http', '$templateCache',
-      function ($http, $templateCache) {
+    .directive('teluiCombobox', ['$http', '$templateCache','TelUIValidate'
+      function ($http, $templateCache, TelUIValidate) {
             'use strict';
 
             function link($scope, $element) {
@@ -44,6 +44,9 @@ TelogicalUi
                             });
                         }
                     }
+
+                    TelUIValidate.buildValidators($scope);
+                    TelUIValidate.validate($scope);
 
                     var autoCompleteOptions = {
                         delay: 0,
@@ -125,10 +128,11 @@ TelogicalUi
                     $scope.value = val;
                     if (val && typeof val === 'object') {
                         _input.val(val[$scope.labelProp]);
-
                     } else {
                         _input.val(val);
                     }
+
+                    TelUIValidate.validate($scope);
                     $scope.isEmpty = !_input.val().length;
                 }
 
@@ -297,6 +301,8 @@ TelogicalUi
                 'placeholder': '@',
                 'state': '@'
             };
+
+            TelUIValidate.attach(scopeObj);
 
             return {
                 restrict: 'E',

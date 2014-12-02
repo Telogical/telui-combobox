@@ -3,7 +3,8 @@
     "version": "0.0.11",
     "private": true,
     "dependencies": {
-        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core",
+        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core.git#develop-flatui-vanilla",
+        "TelUI-Validate": "git+ssh://git@github.com:Telogical/TelUI-Validate.git#develop-nested",
         "partialify": "*",
 		"react": "0.11.x" 
     },
