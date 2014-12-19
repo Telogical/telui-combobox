@@ -3,7 +3,8 @@
     "version": "0.0.9",
     "private": true,
     "dependencies": {
-        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core",
+        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core#React-Stable",
+        "TelUI-Form": "git+ssh://git@github.com:Telogical/TelUI-Form#React-Stable",
         "partialify": "*"
     },
     "devDependencies": {
