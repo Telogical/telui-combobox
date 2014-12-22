@@ -82,15 +82,37 @@ function Combobox(ui) {
         inputAttrs = {
           className: 'ui-combobox-input'
         };
-
+      
+      
+      
+      //model.buttonScope.value = model.open;
+      
+      
+//{
+//  id: id,
+//  label: scope.label,
+//  labelProp: scope.labelProp,
+//  iconPrimary: scope.iconPrimary,
+//  iconSecondary: scope.iconSecondary,
+//  cssClass: scope.cssClass,
+//  text: scope.text,
+//  disabled: scope.disabled,
+//  click: scope.click,
+//  value: scope.value,
+//  data: scope.data,
+//  name: scope.name,
+//  appearance: scope.appearance || 'checkbox',
+//  uiState: scope.state || '',
+//  scope: scope
+//}
+      
+      
       var btnModel = {
         appearance: 'button',
         iconPrimary: model.iconPrimary || 'carat-1-s',
         uiState: model.uiState || 'default',
-        scope: {
-          value: true,
-          //$apply: model.scope.$apply
-        }
+        value: model.buttonScope.value,
+        scope: model.buttonScope
       };
 
       var label = domx.label(labelAttrs, model.label),

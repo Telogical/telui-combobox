@@ -24,14 +24,18 @@ TelogicalUi
           click: '&?',
           cssClass: '@',
           text: '=?',
-          state: '@'
+          state: '@',
+          open: '=?'
         },
         template: '<div class="waffles"></div>',
         link: function link(scope, $el, attrs) {
           var id = scope.id ?
             scope.id :
             'combobox_' + Math.round(Math.random() * 9999);
-
+          
+          scope.buttonScope = scope.$new(true);
+          scope.buttonScope.value = scope.open || false;
+          
           function render(newValue, oldValue) {
 
             if (typeof scope.text === 'undefined') {
@@ -42,6 +46,7 @@ TelogicalUi
 
             var model = {
               scope: scope,
+              buttonScope: scope.buttonScope,
               id: id,
               label: scope.label,
               iconPrimary: scope.iconPrimary,
@@ -53,15 +58,14 @@ TelogicalUi
               value: scope.value,
               appearance: scope.appearance || 'button',
               orientation: scope.orientation || 'vertical',
-              uiState: scope.state || '',
-              open: scope.open || false
+              uiState: scope.state || ''
             };
 
             React.renderComponent(UI.Combobox(model), $el[0]);
           }
 
           //scope.$parent.$watch(attrs.ngDisabled, render);
-          scope.$watchCollection('[label, iconPrimary, iconSecondary, disabled, cssClass, text, click, appearance, state, open]', render);
+          scope.$watchCollection('[value, label, iconPrimary, iconSecondary, disabled, cssClass, text, click, appearance, state, open, buttonScope.value]', render);
 
         }
       };
