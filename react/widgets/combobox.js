@@ -1,9 +1,7 @@
 var React = require('react/addons');
 
-
 function Combobox(ui) {
   'use strict';
-
   return React.createClass({
     displayName: 'Button',
     mixins: [ui.Mixins.Widget],
@@ -16,7 +14,6 @@ function Combobox(ui) {
         label: ''
       };
     },
-
     // <div data-ng-id="combobox" class="waffles ui-widget ui-combobox ui-corner-all">
     //    <div class="w-12 w-alpha w-omega">
     //        <div class="w-12 w-alpha w-omega" for="{{id}}_input">
@@ -49,10 +46,6 @@ function Combobox(ui) {
     //        </div>
     //    </div>
     //</div>
-
-
-
-
     render: function render() {
       var cx = React.addons.classSet,
         domx = React.DOM,
@@ -82,31 +75,26 @@ function Combobox(ui) {
         inputAttrs = {
           className: 'ui-combobox-input'
         };
-      
-      
-      
+
       //model.buttonScope.value = model.open;
-      
-      
-//{
-//  id: id,
-//  label: scope.label,
-//  labelProp: scope.labelProp,
-//  iconPrimary: scope.iconPrimary,
-//  iconSecondary: scope.iconSecondary,
-//  cssClass: scope.cssClass,
-//  text: scope.text,
-//  disabled: scope.disabled,
-//  click: scope.click,
-//  value: scope.value,
-//  data: scope.data,
-//  name: scope.name,
-//  appearance: scope.appearance || 'checkbox',
-//  uiState: scope.state || '',
-//  scope: scope
-//}
-      
-      
+      //{
+      //  id: id,
+      //  label: scope.label,
+      //  labelProp: scope.labelProp,
+      //  iconPrimary: scope.iconPrimary,
+      //  iconSecondary: scope.iconSecondary,
+      //  cssClass: scope.cssClass,
+      //  text: scope.text,
+      //  disabled: scope.disabled,
+      //  click: scope.click,
+      //  value: scope.value,
+      //  data: scope.data,
+      //  name: scope.name,
+      //  appearance: scope.appearance || 'checkbox',
+      //  uiState: scope.state || '',
+      //  scope: scope
+      //}
+
       var btnModel = {
         appearance: 'button',
         iconPrimary: model.iconPrimary || 'carat-1-s',
@@ -121,8 +109,21 @@ function Combobox(ui) {
         input = domx.input(inputAttrs),
         buttonFrame = domx.div(buttonFrameAttrs, button),
         inputFrame = domx.div(inputFrameAttrs, input),
-        contentFrame = domx.div(contentFrameAttrs, [buttonFrame, inputFrame]),
-        frame = domx.div(frameAttrs, [labelFrame, contentFrame]);
+        contentFrame = domx.div(contentFrameAttrs, [buttonFrame, inputFrame]);
+
+      var contents = [
+          labelFrame,
+          contentFrame];
+
+      if (model.buttonScope.value) {
+        var patrickDuffy = domx.img({
+          src: 'http://i.imgur.com/bpSm4Xe.jpg'
+        });
+        
+        contents.push(patrickDuffy);
+      }
+      
+      var frame = domx.div(frameAttrs, contents);
 
       return frame;
     }
