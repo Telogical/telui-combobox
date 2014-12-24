@@ -4,7 +4,7 @@ function Combobox(ui) {
   'use strict';
   return React.createClass({
     displayName: 'Button',
-    mixins: [ui.Mixins.Widget, ui.Mixins.Dropdown],
+    mixins: [ui.Mixins.Widget],
     propTypes: {
 
     },
@@ -100,7 +100,8 @@ function Combobox(ui) {
         iconPrimary: model.iconPrimary || 'carat-1-s',
         uiState: model.uiState || 'default',
         value: model.buttonScope.value,
-        scope: model.buttonScope
+        scope: model.buttonScope,
+        disabled: model.disabled
       };
 
       var label = domx.label(labelAttrs, model.label),
@@ -119,7 +120,13 @@ function Combobox(ui) {
       if (model.buttonScope.value) {
         //then stick a menu in a dropdown.
 
-        var menu = ui.Menu();
+        console.log('data', model.data);
+        var menuModel = {
+          data: model.data || [],
+          disabled: model.disabled,
+          labelProp: model.labelProp
+        };
+        var menu = ui.Menu(menuModel);
 
         contents.push(menu);
       }

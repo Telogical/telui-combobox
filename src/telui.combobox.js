@@ -16,16 +16,17 @@ TelogicalUi
         scope: {
           id: '@',
           value: '=?',
+          data: '=?',
           label: '@',
           disabled: '=',
           iconPrimary: '@',
           iconSecondary: '@',
-          appearance: '@',
           click: '&?',
           cssClass: '@',
           text: '=?',
           state: '@',
-          open: '=?'
+          maxHeight: '@',
+          labelProp: '@'
         },
         template: '<div class="waffles"></div>',
         link: function link(scope, $el, attrs) {
@@ -56,16 +57,17 @@ TelogicalUi
               disabled: scope.disabled,
               click: scope.click,
               value: scope.value,
-              appearance: scope.appearance || 'button',
-              orientation: scope.orientation || 'vertical',
-              uiState: scope.state || ''
+              data: scope.data,
+              uiState: scope.state || '',
+              maxHeight: scope.maxHeight || 'auto',
+              labelProp: scope.labelProp || 'label'
             };
 
             React.renderComponent(UI.Combobox(model), $el[0]);
           }
 
           //scope.$parent.$watch(attrs.ngDisabled, render);
-          scope.$watchCollection('[value, label, iconPrimary, iconSecondary, disabled, cssClass, text, click, appearance, state, open, buttonScope.value]', render);
+          scope.$watchCollection('[value, data, label, labelProp,iconPrimary, iconSecondary, disabled, cssClass, text, click, state, buttonScope.value]', render);
 
         }
       };

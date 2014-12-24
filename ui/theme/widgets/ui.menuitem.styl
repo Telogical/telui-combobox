@@ -1,0 +1,29 @@
+.ui-appearance-menuitem
+  min-height: $brick;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: $line;
+  font-family: $font-family;
+  a
+    box-sizing();
+    line-height: $line-height;
+    font-size: $line;
+    min-height: $line-height;
+    display: block;
+    padding: $line-margin;
+    margin: 0;
+    cursor: pointer;
+    vertical-align: middle;
+    text-indent: $line-margin
+
+.ui-appearance-menuitem:hover,
+.ui-appearance-menuitem.ui-state-hover
+  background-color: $color-default
+  color: #eee
+
+.ui-appearance-menuitem:focus,
+.ui-appearance-menuitem.ui-state-focus,
+.ui-appearance-menuitem.ui-state-active
+  background-color: $color-default
+  color: #eee

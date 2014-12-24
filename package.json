@@ -1,20 +1,20 @@
 {
-    "name": "TelUI-ComboBox",
-    "version": "0.0.9",
-    "private": true,
-    "dependencies": {
-        "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core#React-Stable",
-        "TelUI-Form": "git+ssh://git@github.com:Telogical/TelUI-Form#React-Stable",
-        "partialify": "*"
-    },
-    "devDependencies": {
-        "lodash": "*",
-		"browserify": "3.46.0",
-		"browserify-shim": "3.x.x"
-    },
-    "browserify": {
-        "transform": [
+  "name": "TelUI-ComboBox",
+  "version": "0.0.9",
+  "private": true,
+  "dependencies": {
+    "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core#React-Stable",
+    "TelUI-Form": "git+ssh://git@github.com:Telogical/TelUI-Form#React-Stable",
+    "partialify": "*"
+  },
+  "devDependencies": {
+    "lodash": "*",
+    "browserify": "3.46.0",
+    "browserify-shim": "3.x.x"
+  },
+  "browserify": {
+    "transform": [
             "partialify"
         ]
-    }
+  }
 }

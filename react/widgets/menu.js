@@ -1,3 +1,5 @@
+//think...shoudl this be an appearance of menuitem, yet a list of somethign else.
+
 var React = require('react/addons');
 
 function Menu(ui) {
@@ -24,7 +26,44 @@ function Menu(ui) {
         src: 'http://i.imgur.com/bpSm4Xe.jpg'
       });
 
-      return patrickDuffy;
+
+
+
+      //temporary....
+
+
+
+      function toMenuitem(d) {
+
+        console.log(d)
+
+        var menuitemModel = {
+          label: d[model.labelProp],
+          text: true,
+          appearance: 'menuitem',
+          disabled: model.diabled
+        };
+
+        return ui.Button(menuitemModel);
+      }
+
+
+
+      var menulist = model.data.map(toMenuitem);
+
+      var menuClasses = {
+        'ui-widget': true,
+        'ui-menu': true,
+        'ui-list-menuitem': true
+      };
+
+      var menuAttrs = {
+        className: cx(menuClasses)
+      };
+
+      var menu = domx.div(menuAttrs, menulist)
+
+      return menu;
     }
   });
 }

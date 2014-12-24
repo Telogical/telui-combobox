@@ -20,7 +20,7 @@ function Textbox(ui) {
         model = this.props,
         row = 'w-12 w-alpha w-omega';
 
-      return domx.input();  
+      return domx.input({});
     }
   });
 }
