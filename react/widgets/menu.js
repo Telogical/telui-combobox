@@ -61,7 +61,7 @@ function Menu(ui) {
         className: cx(menuClasses)
       };
 
-      var menu = domx.div(menuAttrs, menulist)
+      var menu = domx.ul(menuAttrs, menulist);
 
       return menu;
     }
