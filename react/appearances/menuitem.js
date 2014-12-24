@@ -47,7 +47,7 @@ function AppearanceMenuitem(ui) {
         domx = React.DOM;
 
       var spanAttrs = {
-        'className': 'ui-appearance-menuitem-text w-auto',
+        'className': 'ui-appearance-menuitem-text w-auto ui-typography-textalign-left',
         id: this.props.id + '_menuitem_label'
       };
 

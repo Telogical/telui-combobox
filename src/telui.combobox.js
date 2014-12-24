@@ -37,6 +37,9 @@ TelogicalUi
           scope.buttonScope = scope.$new(true);
           scope.buttonScope.value = scope.open || false;
           
+          scope.menuScope = scope.$new(true);
+          scope.menuScope.value = scope.value;
+          
           function render(newValue, oldValue) {
 
             if (typeof scope.text === 'undefined') {
@@ -46,8 +49,12 @@ TelogicalUi
             $el.removeAttr('disabled');
 
             var model = {
+              //scopes
               scope: scope,
               buttonScope: scope.buttonScope,
+              menuScope: scope.menuScope,
+              
+              //attrs
               id: id,
               label: scope.label,
               iconPrimary: scope.iconPrimary,
@@ -67,7 +74,7 @@ TelogicalUi
           }
 
           //scope.$parent.$watch(attrs.ngDisabled, render);
-          scope.$watchCollection('[value, data, label, labelProp,iconPrimary, iconSecondary, disabled, cssClass, text, click, state, buttonScope.value]', render);
+          scope.$watchCollection('[value, data, label, labelProp,iconPrimary, iconSecondary, disabled, cssClass, text, click, state, buttonScope.value, menuScope.value]', render);
 
         }
       };

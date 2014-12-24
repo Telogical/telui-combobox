@@ -1,3 +1,5 @@
+tolerance = $interactivityTolerance;
+
 .ui-appearance-menuitem
   min-height: $brick;
   padding: 0;
@@ -5,7 +7,7 @@
   box-sizing: border-box;
   font-size: $line;
   font-family: $font-family;
-  a
+  .ui-appearance-menuitem-text
     box-sizing();
     line-height: $line-height;
     font-size: $line;
@@ -25,5 +27,10 @@
 .ui-appearance-menuitem:focus,
 .ui-appearance-menuitem.ui-state-focus,
 .ui-appearance-menuitem.ui-state-active
-  background-color: $color-default
+  background-color: darken(saturate($color-default, (tolerance * 0.8)), (tolerance* 0.2))
   color: #eee
+
+
+.ui-menu.ui-list-menuitem
+  .ui-appearance-menuitem:last-child
+    margin-bottom: $border-width;

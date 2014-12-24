@@ -1,0 +1,46 @@
+_trannySpeed = $transitionSpeed;
+
+.ui-combobox
+  .ui-combobox-label 
+    min-height: $brick;
+    line-height: $brick;
+    font-size: $line;
+  .ui-combobox-input
+    min-height: $brick;
+    transition: color _trannySpeed, border _trannySpeed, background _trannySpeed;
+  .ui-combobox-dropdown
+    position:absolute
+
+.ui-combobox-input-frame
+  margin-right: $brick + ($border-width * 2)
+  float:none
+  width:auto
+  input
+    float:right
+    width:100%;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: $border-radius;
+    border-right-width:0px;
+
+.ui-combobox-dropdownbutton-frame
+  float: right;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: $brick + ($border-width * 2)
+  .ui-appearance-button
+    position:relative;
+    right:$border-width;
+    top:0;
+    bottom:0;
+    border-top-left-radius: 0px;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: 0px;
+
+
+
+ui-states('.ui-combobox','.ui-combobox-label', $ui-states, iLabel, $interactivityTolerance)
+ui-states('.ui-combobox', '.ui-appearance-button', $ui-states, iBtn, $interactivityTolerance)
+ui-states('.ui-combobox', '.ui-combobox-input', $ui-states, iInput, $interactivityTolerance)

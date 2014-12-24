@@ -27,43 +27,49 @@ function Menu(ui) {
       });
 
 
-
-
-      //temporary....
-
-
-
-      function toMenuitem(d) {
-
-        console.log(d)
-
-        var menuitemModel = {
-          label: d[model.labelProp],
-          text: true,
-          appearance: 'menuitem',
-          disabled: model.diabled
-        };
-
-        return ui.Button(menuitemModel);
-      }
-
-
-
-      var menulist = model.data.map(toMenuitem);
-
-      var menuClasses = {
+      var menuFrameClasses = {
         'ui-widget': true,
         'ui-menu': true,
         'ui-list-menuitem': true
       };
 
       var menuAttrs = {
-        className: cx(menuClasses)
+        data: model.data,
+        appearance: 'menuitem',
+        labelProp: model.labelProp,
+        scope: model.menuScope
       };
 
-      var menu = domx.ul(menuAttrs, menulist);
+      var menuAttrs = {
+        id: model.id + '_list',
+        label: '',
+        labelProp: model.labelProp,
+        uiState: model.state,
+        uiStateProp: model.stateProp,
+        iconPrimary: model.iconPrimary,
+        iconSecondary: model.iconSecondary,
+        cssClass: model.cssClass,
+        text: true,
+        disabled: model.disabled,
+        click: model.click,
+        value: model.scope.value,
+        data: model.data,
+        name: model.name,
+        appearance: 'menuitem',
+        orientation:  'vertical',
+        scope: model.scope
+      };
 
-      return menu;
+      var menuFrameAttrs = {
+        id: model.id,
+        className: cx(menuFrameClasses),
+        componentWidth: '100px'
+      };
+
+      var menu = ui.Radiogroup(menuAttrs);
+      var menuframe = domx.div(menuFrameAttrs, menu);
+
+      return menuframe;
     }
   });
 }

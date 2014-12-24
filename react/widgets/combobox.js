@@ -3,7 +3,7 @@ var React = require('react/addons');
 function Combobox(ui) {
   'use strict';
   return React.createClass({
-    displayName: 'Button',
+    displayName: 'Combobox',
     mixins: [ui.Mixins.Widget],
     propTypes: {
 
@@ -46,11 +46,34 @@ function Combobox(ui) {
     //        </div>
     //    </div>
     //</div>
+
+    componentDidUpdate: function componentDidUpdate() {
+      if (this.refs.dropdown) {
+        var input = this.refs.input.getDOMNode(),
+          dropdown = this.refs.dropdown.getDOMNode(),
+          iRect = input.getBoundingClientRect(),
+          body = document.body,
+          docEl = document.documentElement,
+          scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
+          scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
+
+        
+
+        function px(n) {
+          return n + 'px';
+        }
+
+        dropdown.style.width = px(iRect.width);
+        dropdown.style.top = px(iRect.top + iRect.height + scrollTop);
+        dropdown.style.left = px(iRect.left + scrollLeft);
+      }
+    },
     render: function render() {
       var cx = React.addons.classSet,
         domx = React.DOM,
         model = this.props,
-        row = 'w-12 w-alpha w-omega';
+        row = 'w-12 w-alpha w-omega',
+        key = model.id;
 
       console.log(model.id, model);
 
@@ -73,7 +96,8 @@ function Combobox(ui) {
           className: 'ui-combobox-input-frame'
         },
         inputAttrs = {
-          className: 'ui-combobox-input'
+          className: 'ui-combobox-input',
+          ref: 'input'
         };
 
       //model.buttonScope.value = model.open;
@@ -117,18 +141,31 @@ function Combobox(ui) {
           contentFrame
       ];
 
+
       if (model.buttonScope.value) {
         //then stick a menu in a dropdown.
 
         console.log('data', model.data);
         var menuModel = {
+          id: key + '_menu',
           data: model.data || [],
           disabled: model.disabled,
-          labelProp: model.labelProp
+          labelProp: model.labelProp,
+          scope: model.menuScope,
+          state: model.state,
+          ref: 'menu'
         };
-        var menu = ui.Menu(menuModel);
 
-        contents.push(menu);
+        var menuframeAttrs = {
+          ref: 'dropdown',
+          className: 'ui-combobox-dropdown'
+        };
+
+        var menu = ui.Menu(menuModel),
+          dropdown = domx.div(menuframeAttrs, menu);
+
+
+        contents.push(dropdown);
       }
 
       var frame = domx.div(frameAttrs, contents);
