@@ -4,7 +4,7 @@ function Combobox(ui) {
   'use strict';
   return React.createClass({
     displayName: 'Button',
-    mixins: [ui.Mixins.Widget],
+    mixins: [ui.Mixins.Widget, ui.Mixins.Dropdown],
     propTypes: {
 
     },
@@ -113,16 +113,17 @@ function Combobox(ui) {
 
       var contents = [
           labelFrame,
-          contentFrame];
+          contentFrame
+      ];
 
       if (model.buttonScope.value) {
-        var patrickDuffy = domx.img({
-          src: 'http://i.imgur.com/bpSm4Xe.jpg'
-        });
-        
-        contents.push(patrickDuffy);
+        //then stick a menu in a dropdown.
+
+        var menu = ui.Menu();
+
+        contents.push(menu);
       }
-      
+
       var frame = domx.div(frameAttrs, contents);
 
       return frame;
