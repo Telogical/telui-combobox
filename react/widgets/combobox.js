@@ -48,6 +48,11 @@ function Combobox(ui) {
     //</div>
 
     componentDidUpdate: function componentDidUpdate() {
+
+      function px(n) {
+        return n + 'px';
+      }
+
       if (this.refs.dropdown) {
         var input = this.refs.input.getDOMNode(),
           dropdown = this.refs.dropdown.getDOMNode(),
@@ -56,12 +61,6 @@ function Combobox(ui) {
           docEl = document.documentElement,
           scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
           scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
-
-        
-
-        function px(n) {
-          return n + 'px';
-        }
 
         dropdown.style.width = px(iRect.width);
         dropdown.style.top = px(iRect.top + iRect.height + scrollTop);
