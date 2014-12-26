@@ -4,7 +4,7 @@ function Combobox(ui) {
   'use strict';
   return React.createClass({
     displayName: 'Combobox',
-    mixins: [ui.Mixins.Widget],
+    mixins: [ui.Mixins.Widget, ui.Mixins.Appearance], 
     propTypes: {
 
     },
@@ -76,14 +76,23 @@ function Combobox(ui) {
 
       console.log(model.id, model);
 
+      var frameClasses = {
+        'waffles': true,
+        'ui-widget': true,
+        'ui-combobox': true,
+        'ui-corner-all': true
+      };
+
+      frameClasses = this.__applyUiStates.call(this, frameClasses);
+
       var frameAttrs = {
-          className: 'waffles ui-widget ui-combobox ui-corner-all',
+          className: cx(frameClasses),
         },
         labelFrameAttrs = {
           className: row
         },
         labelAttrs = {
-          className: 'ui-combobox-label'
+          className: 'ui-combobox-label ui-state-default'
         },
         contentFrameAttrs = {
           className: row
@@ -95,7 +104,7 @@ function Combobox(ui) {
           className: 'ui-combobox-input-frame'
         },
         inputAttrs = {
-          className: 'ui-combobox-input',
+          className: 'ui-combobox-input ui-state-default',
           ref: 'input'
         };
 
