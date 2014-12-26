@@ -4,7 +4,7 @@ function Combobox(ui) {
   'use strict';
   return React.createClass({
     displayName: 'Combobox',
-    mixins: [ui.Mixins.Widget, ui.Mixins.Appearance], 
+    mixins: [ui.Mixins.Widget, ui.Mixins.Appearance],
     propTypes: {
 
     },
@@ -105,6 +105,7 @@ function Combobox(ui) {
         },
         inputAttrs = {
           className: 'ui-combobox-input ui-state-default',
+          disabled: model.disabled,
           ref: 'input'
         };
 
