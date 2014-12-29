@@ -1,4 +1,5 @@
 var React = require('react/addons');
+var _ = require('lodash');
 
 function Combobox(ui) {
   'use strict';
@@ -14,40 +15,66 @@ function Combobox(ui) {
         label: ''
       };
     },
-    // <div data-ng-id="combobox" class="waffles ui-widget ui-combobox ui-corner-all">
-    //    <div class="w-12 w-alpha w-omega">
-    //        <div class="w-12 w-alpha w-omega" for="{{id}}_input">
-    //            <label class="ui-combobox-label" for="{{id}}_input">{{label}}</label>
-    //        </div>
-    //        <div class="w-12 w-alpha w-omega">
-    //            <div class="ui-combobox-dropdownbutton-frame">
-    //                <telui-button
-    //                        id="{{id}}_dropdownbutton"
-    //                        text="false"
-    //                        icon-primary="ui-icon-carat-1-s"
-    //                        class="ui-combobox-dropdownbutton"
-    //                        click="dropdownButton()"
-    //                        tabindex="-1"
-    //                        >
-    //                </telui-button>
-    //            </div>
-    //            <div class="ui-combobox-input-frame w-v-1">
-    //                <div
-    //                        id="{{id}}_placeholder_frame"
-    //                        class="ui-shim-placeholder-frame"
-    //                        data-ng-show="isEmpty"
-    //                        data-ng-click="focusInput()"
-    //                        data-role="placeholder"
-    //                        >
-    //                    <div id="{{id}}_placeholder" class="ui-shim-placeholder">{{placeholder}}</div>
-    //                </div>
-    //                <input id="{{id}}_input" class="ui-combobox-input"/>
-    //            </div>
-    //        </div>
-    //    </div>
-    //</div>
+    __closeMenu: function closeMenu(eve) {
 
+      var inputNode = this.refs.input.getDOMNode(),
+        menuNode = this.refs.menu.getDOMNode();
+
+      var isCombo = eve.target === inputNode || eve.target === menuNode;
+
+      console.log(eve.target === inputNode, eve.target === menuNode);
+
+      if (isCombo) {
+        return;
+      }
+
+      var model = this.props;
+      model.buttonScope.value = false;
+      model.buttonScope.$apply();
+    },
+    __onInputChange: function (eve) {
+      var model = this.props;
+
+      this.setState({
+        value: null,
+        inputVal: eve.target.value || ''
+      });
+
+      model.scope.value = null;
+      model.scope.$apply();
+
+      console.log('__onInputChange', model.value, model);
+    },
+    __onInputFocus: function () {
+      var model = this.props;
+      model.buttonScope.value = true;
+      model.buttonScope.$apply();
+      console.log('focus');
+    },
+    __onInputBlur: function () {
+      var model = this.props;
+      model.buttonScope.value = false;
+      //model.buttonScope.$apply();
+      console.log('..blur');
+    },
+    __onMenuChange: function onMenuChange(value) {
+      var model = this.props,
+          _value = value.value;
+
+      
+      this.setState({
+        value: value,
+        inputVal: value.label
+      });
+
+      model.scope.$apply(function (scope) {
+        scope.value = _value;
+      });
+
+    },
     componentDidUpdate: function componentDidUpdate() {
+
+      var body = document.body;
 
       function px(n) {
         return n + 'px';
@@ -57,7 +84,6 @@ function Combobox(ui) {
         var input = this.refs.input.getDOMNode(),
           dropdown = this.refs.dropdown.getDOMNode(),
           iRect = input.getBoundingClientRect(),
-          body = document.body,
           docEl = document.documentElement,
           scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
           scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
@@ -65,16 +91,47 @@ function Combobox(ui) {
         dropdown.style.width = px(iRect.width);
         dropdown.style.top = px(iRect.top + iRect.height + scrollTop);
         dropdown.style.left = px(iRect.left + scrollLeft);
+
+        input.focus();
+
+        document.addEventListener('click', this.__closeMenu);
+      } else {
+        document.removeEventListener('click', this.__closeMenu);
       }
+
+
     },
     render: function render() {
       var cx = React.addons.classSet,
         domx = React.DOM,
         model = this.props,
         row = 'w-12 w-alpha w-omega',
-        key = model.id;
+        key = model.id,
+        inputVal = this.state.inputVal || '';
 
-      console.log(model.id, model);
+      console.log('-render-', inputVal, model.id, model);
+
+      function toComboDataModel(d) {
+        //TODO put template here.
+        var label = d[model.labelProp];
+        return {
+          label: label,
+          value: d
+        };
+      }
+
+      function byInputText(_d) {
+        var label = (_d.label || '').toLowerCase(),
+          val = (inputVal || '').toLowerCase();
+        
+        if(model.value){
+          return _d;
+        }
+        
+        if (_.contains(label, val)) {
+          return _d;
+        }
+      }
 
       var frameClasses = {
         'waffles': true,
@@ -106,27 +163,18 @@ function Combobox(ui) {
         inputAttrs = {
           className: 'ui-combobox-input ui-state-default',
           disabled: model.disabled,
-          ref: 'input'
+          ref: 'input',
+          value: inputVal,
+          onChange: this.__onInputChange,
+          onFocus: this.__onInputFocus,
+          onBlur: this.__onInputBlur
         };
 
-      //model.buttonScope.value = model.open;
-      //{
-      //  id: id,
-      //  label: scope.label,
-      //  labelProp: scope.labelProp,
-      //  iconPrimary: scope.iconPrimary,
-      //  iconSecondary: scope.iconSecondary,
-      //  cssClass: scope.cssClass,
-      //  text: scope.text,
-      //  disabled: scope.disabled,
-      //  click: scope.click,
-      //  value: scope.value,
-      //  data: scope.data,
-      //  name: scope.name,
-      //  appearance: scope.appearance || 'checkbox',
-      //  uiState: scope.state || '',
-      //  scope: scope
-      //}
+
+      if (model.value && model.buttonScope.value) {
+        inputAttrs.value = '';
+      }
+
 
       var btnModel = {
         appearance: 'button',
@@ -150,19 +198,29 @@ function Combobox(ui) {
           contentFrame
       ];
 
-
       if (model.buttonScope.value) {
-        //then stick a menu in a dropdown.
 
-        console.log('data', model.data);
+        var _data = _
+          .chain(model.data)
+          .map(toComboDataModel)
+          .filter(byInputText)
+          .value();
+        
+        var _value = this.state.value;
+        
+        console.log('_data', _data);
+        console.log('_value', _value);
+
         var menuModel = {
           id: key + '_menu',
-          data: model.data || [],
+          data: _data || [],
+          value: _value,
           disabled: model.disabled,
-          labelProp: model.labelProp,
+          labelProp: 'label',
           scope: model.menuScope,
           state: model.state,
-          ref: 'menu'
+          ref: 'menu',
+          change: this.__onMenuChange
         };
 
         var menuframeAttrs = {
@@ -173,15 +231,46 @@ function Combobox(ui) {
         var menu = ui.Menu(menuModel),
           dropdown = domx.div(menuframeAttrs, menu);
 
-
         contents.push(dropdown);
       }
 
       var frame = domx.div(frameAttrs, contents);
-
       return frame;
     }
   });
 }
 
 module.exports = Combobox;
+
+// <div data-ng-id="combobox" class="waffles ui-widget ui-combobox ui-corner-all">
+//    <div class="w-12 w-alpha w-omega">
+//        <div class="w-12 w-alpha w-omega" for="{{id}}_input">
+//            <label class="ui-combobox-label" for="{{id}}_input">{{label}}</label>
+//        </div>
+//        <div class="w-12 w-alpha w-omega">
+//            <div class="ui-combobox-dropdownbutton-frame">
+//                <telui-button
+//                        id="{{id}}_dropdownbutton"
+//                        text="false"
+//                        icon-primary="ui-icon-carat-1-s"
+//                        class="ui-combobox-dropdownbutton"
+//                        click="dropdownButton()"
+//                        tabindex="-1"
+//                        >
+//                </telui-button>
+//            </div>
+//            <div class="ui-combobox-input-frame w-v-1">
+//                <div
+//                        id="{{id}}_placeholder_frame"
+//                        class="ui-shim-placeholder-frame"
+//                        data-ng-show="isEmpty"
+//                        data-ng-click="focusInput()"
+//                        data-role="placeholder"
+//                        >
+//                    <div id="{{id}}_placeholder" class="ui-shim-placeholder">{{placeholder}}</div>
+//                </div>
+//                <input id="{{id}}_input" class="ui-combobox-input"/>
+//            </div>
+//        </div>
+//    </div>
+//</div>
