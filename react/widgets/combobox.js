@@ -59,9 +59,9 @@ function Combobox(ui) {
     },
     __onMenuChange: function onMenuChange(value) {
       var model = this.props,
-          _value = value.value;
+        _value = value.value;
 
-      
+
       this.setState({
         value: value,
         inputVal: value.label
@@ -70,29 +70,32 @@ function Combobox(ui) {
       model.scope.$apply(function (scope) {
         scope.value = _value;
       });
-
     },
     componentDidUpdate: function componentDidUpdate() {
 
-      var body = document.body;
+      var body = document.body,
+        model = this.props;
 
-      function px(n) {
-        return n + 'px';
-      }
+
 
       if (this.refs.dropdown) {
         var input = this.refs.input.getDOMNode(),
           dropdown = this.refs.dropdown.getDOMNode(),
+          menu = this.refs.menu.getDOMNode(),
+          //list = this.refs.menu.list.getDOMNode(),  
           iRect = input.getBoundingClientRect(),
           docEl = document.documentElement,
           scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
           scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
 
-        dropdown.style.width = px(iRect.width);
-        dropdown.style.top = px(iRect.top + iRect.height + scrollTop);
-        dropdown.style.left = px(iRect.left + scrollLeft);
 
+
+        dropdown.style.width = this._toPx(iRect.width);
+        dropdown.style.top = this._toPx(iRect.top + iRect.height + scrollTop);
+        dropdown.style.left = this._toPx(iRect.left + scrollLeft);
         input.focus();
+
+        //console.log('list', list);
 
         document.addEventListener('click', this.__closeMenu);
       } else {
@@ -114,20 +117,27 @@ function Combobox(ui) {
       function toComboDataModel(d) {
         //TODO put template here.
         var label = d[model.labelProp];
-        return {
+
+        var cbModel = {
           label: label,
           value: d
         };
+
+        if (d.id) {
+          cbModel.id = d.id;
+        }
+
+        return cbModel;
       }
 
       function byInputText(_d) {
         var label = (_d.label || '').toLowerCase(),
           val = (inputVal || '').toLowerCase();
-        
-        if(model.value){
+
+        if (model.value) {
           return _d;
         }
-        
+
         if (_.contains(label, val)) {
           return _d;
         }
@@ -200,14 +210,16 @@ function Combobox(ui) {
 
       if (model.buttonScope.value) {
 
+        //todo memoize this, or
+        //provide some option to
         var _data = _
           .chain(model.data)
           .map(toComboDataModel)
           .filter(byInputText)
           .value();
-        
+
         var _value = this.state.value;
-        
+
         console.log('_data', _data);
         console.log('_value', _value);
 
@@ -220,13 +232,20 @@ function Combobox(ui) {
           scope: model.menuScope,
           state: model.state,
           ref: 'menu',
-          change: this.__onMenuChange
+          name: key + '_menu',
+          change: this.__onMenuChange,
+          maxHeight: model.maxHeight
         };
 
         var menuframeAttrs = {
           ref: 'dropdown',
           className: 'ui-combobox-dropdown'
+
         };
+
+  
+
+        console.log('menuframeAttrs.style');
 
         var menu = ui.Menu(menuModel),
           dropdown = domx.div(menuframeAttrs, menu);

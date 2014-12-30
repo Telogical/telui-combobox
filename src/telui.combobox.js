@@ -74,7 +74,7 @@ TelogicalUi
           }
 
           //scope.$parent.$watch(attrs.ngDisabled, render);
-          scope.$watchCollection('[value, data, label, labelProp,iconPrimary, iconSecondary, disabled, cssClass, text, click, state, buttonScope.value, menuScope.value]', render);
+          scope.$watchCollection('[value, data, label, labelProp,iconPrimary, iconSecondary, disabled, cssClass, text, click, state, buttonScope.value, menuScope.value, maxHeight]', render);
 
         }
       };

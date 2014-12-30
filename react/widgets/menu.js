@@ -16,9 +16,8 @@ function Menu(ui) {
         label: ''
       };
     },
+    __change: function change(value) {
 
-    __change: function (value) {
-      
       var model = this.props;
 
       if (model.disabled) {
@@ -55,14 +54,14 @@ function Menu(ui) {
         cssClass: model.cssClass,
         text: true,
         disabled: model.disabled,
-        value: model.scope.value,
+        value: model.value,
         data: model.data,
         name: model.name,
         appearance: 'menuitem',
         orientation: 'vertical',
-        scope: model.scope
+        scope: model.scope,
+        ref: 'list'
       };
-
 
       menuAttrs.change = this.__change;
 
@@ -70,6 +69,13 @@ function Menu(ui) {
         id: model.id,
         className: cx(menuFrameClasses)
       };
+
+      if (model.maxHeight) {
+        menuFrameAttrs.style = {
+          'height': this._toPx(model.maxHeight),
+          'overflow': 'auto'
+        };
+      }
 
       var menu = ui.Radiogroup(menuAttrs),
         menuframe = domx.div(menuFrameAttrs, menu);
