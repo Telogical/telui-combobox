@@ -72,7 +72,7 @@ function Menu(ui) {
 
       if (model.maxHeight) {
         menuFrameAttrs.style = {
-          'height': this._toPx(model.maxHeight),
+          'maxHeight': this._toPx(model.maxHeight),
           'overflow': 'auto'
         };
       }
