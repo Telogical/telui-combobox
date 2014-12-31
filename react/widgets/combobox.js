@@ -212,7 +212,9 @@ function Combobox(ui) {
           labelFrame,
           contentFrame
       ];
+      
 
+      
       if (model.buttonScope.value) {
 
         //todo memoize this, or
@@ -251,7 +253,7 @@ function Combobox(ui) {
           dropdown = domx.div(menuframeAttrs, menu);
 
         contents.push(dropdown);
-      }
+      } 
 
       var frame = domx.div(frameAttrs, contents);
       return frame;
