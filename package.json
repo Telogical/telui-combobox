@@ -5,7 +5,8 @@
   "dependencies": {
     "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core#React-Stable",
     "TelUI-Form": "git+ssh://git@github.com:Telogical/TelUI-Form#React-Stable-Perf",
-    "partialify": "*"
+    "partialify": "*",
+    "react": "0.11.x" 
   },
   "devDependencies": {
     "lodash": "*",

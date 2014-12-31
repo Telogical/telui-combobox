@@ -113,13 +113,18 @@ function Combobox(ui) {
         inputVal = this.state.inputVal || '';
 
       console.log('-render-', inputVal, model.id, model);
+      
+      //templating
+      var labelProp = model.labelProp,
+        isTemplate = _.contains(labelProp, '<%') || _.contains(labelProp, '%>'),
+        labelTemplateString = isTemplate ? labelProp : '<%= ' + labelProp + '%>',
+        labelTemplate = _.template(labelTemplateString);  
 
       function toComboDataModel(d) {
         //TODO put template here.
-        var label = d[model.labelProp];
 
         var cbModel = {
-          label: label,
+          label: labelTemplate(d),
           value: d
         };
 
@@ -240,12 +245,7 @@ function Combobox(ui) {
         var menuframeAttrs = {
           ref: 'dropdown',
           className: 'ui-combobox-dropdown'
-
         };
-
-  
-
-        console.log('menuframeAttrs.style');
 
         var menu = ui.Menu(menuModel),
           dropdown = domx.div(menuframeAttrs, menu);
