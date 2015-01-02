@@ -16,7 +16,6 @@ function Combobox(ui) {
       };
     },
     __closeMenu: function closeMenu(eve) {
-
       var inputNode = this.refs.input.getDOMNode(),
         menuNode = this.refs.menu.getDOMNode();
 
@@ -61,7 +60,6 @@ function Combobox(ui) {
       var model = this.props,
         _value = value.value;
 
-
       this.setState({
         value: value,
         inputVal: value.label
@@ -70,14 +68,10 @@ function Combobox(ui) {
       model.scope.$apply(function (scope) {
         scope.value = _value;
       });
-
     },
     componentDidUpdate: function componentDidUpdate() {
-
       var body = document.body,
         model = this.props;
-
-
 
       if (this.refs.dropdown) {
         var input = this.refs.input.getDOMNode(),
@@ -89,15 +83,12 @@ function Combobox(ui) {
           scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
           scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
 
-
-
         dropdown.style.width = this._toPx(iRect.width);
         dropdown.style.top = this._toPx(iRect.top + iRect.height + scrollTop);
         dropdown.style.left = this._toPx(iRect.left + scrollLeft);
         input.focus();
 
         //console.log('list', list);
-
         document.addEventListener('click', this.__closeMenu);
       } else {
         document.removeEventListener('click', this.__closeMenu);
@@ -117,7 +108,6 @@ function Combobox(ui) {
         isTemplate = _.contains(labelProp, '<%') || _.contains(labelProp, '%>'),
         labelTemplateString = isTemplate ? labelProp : '<%= ' + labelProp + '%>',
         labelTemplate = _.template(labelTemplateString);
-
 
       function toComboDataModel(d) {
         //TODO put template here.
@@ -145,15 +135,10 @@ function Combobox(ui) {
           return _d;
         }
       }
-      
+
       var inputVal = this.state.inputVal || '';
-      
-      //internal data list
-      var _data = _
-        .chain(model.data)
-        .map(toComboDataModel)
-        .filter(byInputText)
-        .value();
+
+
 
       //sync models
       var outOfSync = model.value && !(this.__equals(model.value, this.state.value));
@@ -164,7 +149,6 @@ function Combobox(ui) {
         inputVal = this.state.inputVal;
       }
 
-      
       //build component
       var frameClasses = {
         'waffles': true,
@@ -231,6 +215,13 @@ function Combobox(ui) {
 
       //add menu if present
       if (model.buttonScope.value) {
+
+        //internal data list
+        var _data = _
+          .chain(model.data)
+          .map(toComboDataModel)
+          .filter(byInputText)
+          .value();
 
         //todo memoize this, or
         //provide some option to
