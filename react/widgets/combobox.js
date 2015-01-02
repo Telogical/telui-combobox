@@ -70,6 +70,7 @@ function Combobox(ui) {
       model.scope.$apply(function (scope) {
         scope.value = _value;
       });
+
     },
     componentDidUpdate: function componentDidUpdate() {
 
@@ -101,28 +102,25 @@ function Combobox(ui) {
       } else {
         document.removeEventListener('click', this.__closeMenu);
       }
-
-
     },
     render: function render() {
+
+      //helpers
       var cx = React.addons.classSet,
         domx = React.DOM,
         model = this.props,
         row = 'w-12 w-alpha w-omega',
-        key = model.id,
-        inputVal = this.state.inputVal || '';
+        key = model.id;
 
-      console.log('-render-', inputVal, model.id, model);
-      
       //templating
       var labelProp = model.labelProp,
         isTemplate = _.contains(labelProp, '<%') || _.contains(labelProp, '%>'),
         labelTemplateString = isTemplate ? labelProp : '<%= ' + labelProp + '%>',
-        labelTemplate = _.template(labelTemplateString);  
+        labelTemplate = _.template(labelTemplateString);
+
 
       function toComboDataModel(d) {
         //TODO put template here.
-
         var cbModel = {
           label: labelTemplate(d),
           value: d
@@ -147,7 +145,27 @@ function Combobox(ui) {
           return _d;
         }
       }
+      
+      var inputVal = this.state.inputVal || '';
+      
+      //internal data list
+      var _data = _
+        .chain(model.data)
+        .map(toComboDataModel)
+        .filter(byInputText)
+        .value();
 
+      //sync models
+      var outOfSync = model.value && !(this.__equals(model.value, this.state.value));
+
+      if (outOfSync) {
+        this.state.value = toComboDataModel(model.value);
+        this.state.inputVal = this.state.value.label;
+        inputVal = this.state.inputVal;
+      }
+
+      
+      //build component
       var frameClasses = {
         'waffles': true,
         'ui-widget': true,
@@ -185,11 +203,9 @@ function Combobox(ui) {
           onBlur: this.__onInputBlur
         };
 
-
       if (model.value && model.buttonScope.value) {
         inputAttrs.value = '';
       }
-
 
       var btnModel = {
         appearance: 'button',
@@ -212,28 +228,16 @@ function Combobox(ui) {
           labelFrame,
           contentFrame
       ];
-      
 
-      
+      //add menu if present
       if (model.buttonScope.value) {
 
         //todo memoize this, or
         //provide some option to
-        var _data = _
-          .chain(model.data)
-          .map(toComboDataModel)
-          .filter(byInputText)
-          .value();
-
-        var _value = this.state.value;
-
-        console.log('_data', _data);
-        console.log('_value', _value);
-
         var menuModel = {
           id: key + '_menu',
           data: _data || [],
-          value: _value,
+          value: this.state.value,
           disabled: model.disabled,
           labelProp: 'label',
           scope: model.menuScope,
@@ -253,7 +257,7 @@ function Combobox(ui) {
           dropdown = domx.div(menuframeAttrs, menu);
 
         contents.push(dropdown);
-      } 
+      }
 
       var frame = domx.div(frameAttrs, contents);
       return frame;
