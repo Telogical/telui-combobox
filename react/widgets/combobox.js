@@ -71,24 +71,28 @@ function Combobox(ui) {
     },
     componentDidUpdate: function componentDidUpdate() {
       var body = document.body,
-        model = this.props;
+        model = this.props,
+        input = this.refs.input.getDOMNode();
 
       if (this.refs.dropdown) {
-        var input = this.refs.input.getDOMNode(),
-          dropdown = this.refs.dropdown.getDOMNode(),
+        var dropdown = this.refs.dropdown.getDOMNode(),
           menu = this.refs.menu.getDOMNode(),
-          //list = this.refs.menu.list.getDOMNode(),  
           iRect = input.getBoundingClientRect(),
           docEl = document.documentElement,
           scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
           scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
-
+        
+        //positioning
         dropdown.style.width = this._toPx(iRect.width);
         dropdown.style.top = this._toPx(iRect.top + iRect.height + scrollTop);
         dropdown.style.left = this._toPx(iRect.left + scrollLeft);
+        
+        var list = this.refs.menu.refs.list.getDOMNode();
+        
         input.focus();
 
         //console.log('list', list);
+        
         document.addEventListener('click', this.__closeMenu);
       } else {
         document.removeEventListener('click', this.__closeMenu);
@@ -137,8 +141,6 @@ function Combobox(ui) {
       }
 
       var inputVal = this.state.inputVal || '';
-
-
 
       //sync models
       var outOfSync = model.value && !(this.__equals(model.value, this.state.value));
@@ -197,7 +199,8 @@ function Combobox(ui) {
         uiState: model.uiState || 'default',
         value: model.buttonScope.value,
         scope: model.buttonScope,
-        disabled: model.disabled
+        disabled: model.disabled,
+        focusable: false
       };
 
       var label = domx.label(labelAttrs, model.label),

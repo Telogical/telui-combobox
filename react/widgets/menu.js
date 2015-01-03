@@ -16,6 +16,16 @@ function Menu(ui) {
         label: ''
       };
     },
+
+    __focusMenu: function focusMenu() {
+      console.log('menu was focused');
+      
+      if(this.refs.list){
+        this.refs.list.getDOMNode().focus();
+      }
+      
+    },
+
     __change: function change(value) {
 
       var model = this.props;
@@ -67,7 +77,8 @@ function Menu(ui) {
 
       var menuFrameAttrs = {
         id: model.id,
-        className: cx(menuFrameClasses)
+        className: cx(menuFrameClasses),
+        onFocus: this.__focusMenu
       };
 
       if (model.maxHeight) {
