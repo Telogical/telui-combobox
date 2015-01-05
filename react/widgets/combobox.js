@@ -15,6 +15,110 @@ function Combobox(ui) {
         label: ''
       };
     },
+
+    __keystrokeNavigation: function keystrokeNavigation(eve) {
+
+      var eve = eve || window.event;
+
+      var up = eve.which === 38,
+        down = eve.which === 40,
+        enter = eve.which === 13,
+        tab = eve.which === 8,
+        menu = this.refs.menu,
+        list = menu.refs.list,
+        elMenu = menu.getDOMNode(),
+        elList = list.getDOMNode();
+
+      function hoverItem(childRefs) {
+        function byHovered(child) {
+          return child.state.hover;
+        }
+        var hoveredKey = _.findKey(childRefs, byHovered),
+          index = _.invert(Object.keys(childRefs))[hoveredKey] || -1;
+        return parseInt(index, 10);
+      }
+
+      function getCurrentIndex() {
+        var currentIndex = hoverItem(list.refs);
+        if (currentIndex == -1 && list.props.value) {
+          currentIndex = _.invert(Object.keys(list.refs))[list.props.value.id] || -1;
+        }
+        return parseInt(currentIndex, 10);
+      }
+
+      function clear(li) {
+        if (li.state.hover) {
+          li.setState({
+            hover: false
+          });
+        }
+      }
+
+      function keySelect(index, direction) {
+        var newIndex = index + direction,
+          lis = list.refs,
+          highestIndex = Object.keys(lis).length - 1;
+
+        if (newIndex < 0) {
+          newIndex = highestIndex;
+        }
+
+        if (newIndex > highestIndex) {
+          newIndex = 0;
+        }
+
+        _.each(lis, clear);
+        var targetProp = Object.keys(lis)[newIndex];
+        lis[targetProp].setState({
+          hover: true
+        });
+
+        var elLi = lis[targetProp].getDOMNode(),
+          mRect = elMenu.getBoundingClientRect();
+
+        elMenu.scrollTop = elLi.offsetTop - (mRect.height * 0.5);
+      }
+
+      function movecursor(direction) {
+        var index = getCurrentIndex(),
+          dir = direction === 'up' ? -1 : 1;
+        if (index > -1) {
+          keySelect(index, dir);
+        } else {
+          keySelect(0, 0);
+        }
+      }
+
+      function selectItem() {
+        var index = getCurrentIndex(),
+          lis = list.refs,
+          targetProp = Object.keys(lis)[index],
+          elLi = lis[targetProp].refs.appearance.getDOMNode();
+
+        elLi.click();
+      }
+
+      if (up) {
+        movecursor('up');
+      }
+
+      if (down) {
+        movecursor('down');
+      }
+
+      if (enter) {
+        selectItem();
+        this.__onInputFocus();
+      }
+
+      if (tab) {
+
+        eve.preventDefault();
+        selectItem();
+        this.__closeMenu();
+      }
+
+    },
     __closeMenu: function closeMenu(eve) {
       var inputNode = this.refs.input.getDOMNode(),
         menuNode = this.refs.menu.getDOMNode();
@@ -48,7 +152,6 @@ function Combobox(ui) {
       var model = this.props;
       model.buttonScope.value = true;
       model.buttonScope.$apply();
-      console.log('focus');
     },
     __onInputBlur: function () {
       var model = this.props;
@@ -81,22 +184,23 @@ function Combobox(ui) {
           docEl = document.documentElement,
           scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
           scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
-        
+
         //positioning
         dropdown.style.width = this._toPx(iRect.width);
         dropdown.style.top = this._toPx(iRect.top + iRect.height + scrollTop);
         dropdown.style.left = this._toPx(iRect.left + scrollLeft);
-        
-        var list = this.refs.menu.refs.list.getDOMNode();
-        
-        input.focus();
 
-        //console.log('list', list);
-        
+        //eventing
+        input.addEventListener('keyup', this.__keystrokeNavigation);
         document.addEventListener('click', this.__closeMenu);
-      } else {
-        document.removeEventListener('click', this.__closeMenu);
+
+        input.focus();
+        return;
       }
+      
+      input.removeEventListener('keyup', this.__keystrokeNavigation);
+      document.removeEventListener('click', this.__closeMenu);
+      return;
     },
     render: function render() {
 
