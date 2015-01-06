@@ -54,6 +54,13 @@ function Combobox(ui) {
         }
       }
 
+      function focusOnLi(li) {
+        var elLi = li.getDOMNode(),
+          mRect = elMenu.getBoundingClientRect();
+
+        elMenu.scrollTop = elLi.offsetTop - (mRect.height * 0.5);
+      }
+
       function keySelect(index, direction) {
         var newIndex = index + direction,
           lis = list.refs,
@@ -73,10 +80,7 @@ function Combobox(ui) {
           hover: true
         });
 
-        var elLi = lis[targetProp].getDOMNode(),
-          mRect = elMenu.getBoundingClientRect();
-
-        elMenu.scrollTop = elLi.offsetTop - (mRect.height * 0.5);
+        focusOnLi(lis[targetProp]);
       }
 
       function movecursor(direction) {
@@ -114,6 +118,7 @@ function Combobox(ui) {
       if (tab) {
 
         eve.preventDefault();
+        eve.stopPropagation();
         selectItem();
         this.__closeMenu();
       }
@@ -178,26 +183,38 @@ function Combobox(ui) {
         input = this.refs.input.getDOMNode();
 
       if (this.refs.dropdown) {
-        var dropdown = this.refs.dropdown.getDOMNode(),
-          menu = this.refs.menu.getDOMNode(),
+        var elDropdown = this.refs.dropdown.getDOMNode(),
+          menu = this.refs.menu,
+          elMenu = menu.getDOMNode(),
+          list = menu.refs.list,
           iRect = input.getBoundingClientRect(),
           docEl = document.documentElement,
           scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
           scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
 
         //positioning
-        dropdown.style.width = this._toPx(iRect.width);
-        dropdown.style.top = this._toPx(iRect.top + iRect.height + scrollTop);
-        dropdown.style.left = this._toPx(iRect.left + scrollLeft);
+        elDropdown.style.width = this._toPx(iRect.width);
+        elDropdown.style.top = this._toPx(iRect.top + iRect.height + scrollTop);
+        elDropdown.style.left = this._toPx(iRect.left + scrollLeft);
 
         //eventing
         input.addEventListener('keyup', this.__keystrokeNavigation);
         document.addEventListener('click', this.__closeMenu);
 
         input.focus();
+
+        //center on active item, if any
+        if (model.value) {
+          var li = list.refs[model.value.id],
+            elLi = li.getDOMNode(),
+            mRect = elMenu.getBoundingClientRect();
+          
+          elMenu.scrollTop = elLi.offsetTop - (mRect.height * 0.5);
+        }
+
         return;
       }
-      
+
       input.removeEventListener('keyup', this.__keystrokeNavigation);
       document.removeEventListener('click', this.__closeMenu);
       return;
@@ -343,7 +360,8 @@ function Combobox(ui) {
           ref: 'menu',
           name: key + '_menu',
           change: this.__onMenuChange,
-          maxHeight: model.maxHeight
+          maxHeight: model.maxHeight,
+          focusable: false
         };
 
         var menuframeAttrs = {

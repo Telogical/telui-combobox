@@ -72,7 +72,11 @@ function Menu(ui) {
         scope: model.scope,
         ref: 'list'
       };
-
+      
+      if(model.focusable === false){
+        
+      }
+      
       menuAttrs.change = this.__change;
 
       var menuFrameAttrs = {
