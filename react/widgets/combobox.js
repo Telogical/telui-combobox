@@ -208,7 +208,7 @@ function Combobox(ui) {
           var li = list.refs[model.value.id],
             elLi = li.getDOMNode(),
             mRect = elMenu.getBoundingClientRect();
-          
+
           elMenu.scrollTop = elLi.offsetTop - (mRect.height * 0.5);
         }
 
@@ -234,15 +234,22 @@ function Combobox(ui) {
         labelTemplateString = isTemplate ? labelProp : '<%= ' + labelProp + '%>',
         labelTemplate = _.template(labelTemplateString);
 
+
+
       function toComboDataModel(d) {
         //TODO put template here.
+
         var cbModel = {
-          label: labelTemplate(d),
+          label: d,
           value: d
         };
 
-        if (d.id) {
-          cbModel.id = d.id;
+        if (_.isObject(d)) {
+          cbModel.label = labelTemplate(d);
+
+          if (d.id) {
+            cbModel.id = d.id;
+          }
         }
 
         return cbModel;
@@ -356,12 +363,13 @@ function Combobox(ui) {
           disabled: model.disabled,
           labelProp: 'label',
           scope: model.menuScope,
-          state: model.state,
+          uiState: model.uiState,
           ref: 'menu',
           name: key + '_menu',
           change: this.__onMenuChange,
           maxHeight: model.maxHeight,
-          focusable: false
+          focusable: false,
+          appearance: 'menuitem'
         };
 
         var menuframeAttrs = {

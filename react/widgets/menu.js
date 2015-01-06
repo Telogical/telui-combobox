@@ -19,11 +19,11 @@ function Menu(ui) {
 
     __focusMenu: function focusMenu() {
       console.log('menu was focused');
-      
-      if(this.refs.list){
+
+      if (this.refs.list) {
         this.refs.list.getDOMNode().focus();
       }
-      
+
     },
 
     __change: function change(value) {
@@ -57,7 +57,7 @@ function Menu(ui) {
         id: model.id + '_list',
         label: '',
         labelProp: model.labelProp,
-        uiState: model.state,
+        uiState: model.uiState,
         uiStateProp: model.stateProp,
         iconPrimary: model.iconPrimary,
         iconSecondary: model.iconSecondary,
@@ -67,16 +67,13 @@ function Menu(ui) {
         value: model.value,
         data: model.data,
         name: model.name,
-        appearance: 'menuitem',
+        appearance: model.appearance || 'menuitem',
         orientation: 'vertical',
         scope: model.scope,
-        ref: 'list'
+        ref: 'list',
+        focusable: model.focusable
       };
-      
-      if(model.focusable === false){
-        
-      }
-      
+
       menuAttrs.change = this.__change;
 
       var menuFrameAttrs = {
