@@ -23,7 +23,9 @@ function Combobox(ui) {
       var up = eve.which === 38,
         down = eve.which === 40,
         enter = eve.which === 13,
-        tab = eve.which === 8,
+        tab = eve.which === 9,
+        backspace = eve.which === 8,
+        deletekey = eve.which === 46,
         menu = this.refs.menu,
         list = menu.refs.list,
         elMenu = menu.getDOMNode(),
@@ -94,12 +96,25 @@ function Combobox(ui) {
       }
 
       function selectItem() {
-        var index = getCurrentIndex(),
-          lis = list.refs,
-          targetProp = Object.keys(lis)[index],
-          elLi = lis[targetProp].refs.appearance.getDOMNode();
+        var index = getCurrentIndex();
 
-        elLi.click();
+        //you are in the input, so grab the first one!
+        if (index === -1) {
+          index = 0;
+        }
+
+        var lis = list.refs,
+          targetProp = Object.keys(lis)[index],
+          li = lis[targetProp];
+
+
+        if (li) {
+          //something is selectable
+          var elLi = li.refs.appearance.getDOMNode();
+          elLi.click();
+          return;
+        }
+
       }
 
       if (up) {
@@ -116,21 +131,22 @@ function Combobox(ui) {
       }
 
       if (tab) {
-
-        eve.preventDefault();
-        eve.stopPropagation();
         selectItem();
-        this.__closeMenu();
+      }
+
+      if (backspace || deletekey) {
+
+        this.setState({
+          value: null,
+          inputVal: eve.target.value || ''
+        });
       }
 
     },
     __closeMenu: function closeMenu(eve) {
       var inputNode = this.refs.input.getDOMNode(),
-        menuNode = this.refs.menu.getDOMNode();
-
-      var isCombo = eve.target === inputNode || eve.target === menuNode;
-
-      console.log(eve.target === inputNode, eve.target === menuNode);
+        menuNode = this.refs.menu.getDOMNode(),
+        isCombo = eve.target === inputNode || eve.target === menuNode;
 
       if (isCombo) {
         return;
@@ -198,24 +214,34 @@ function Combobox(ui) {
         elDropdown.style.left = this._toPx(iRect.left + scrollLeft);
 
         //eventing
-        input.addEventListener('keyup', this.__keystrokeNavigation);
+        input.addEventListener('keydown', this.__keystrokeNavigation);
         document.addEventListener('click', this.__closeMenu);
 
         input.focus();
 
         //center on active item, if any
         if (model.value) {
-          var li = list.refs[model.value.id],
-            elLi = li.getDOMNode(),
-            mRect = elMenu.getBoundingClientRect();
+          //handle non Id ones.
 
-          elMenu.scrollTop = elLi.offsetTop - (mRect.height * 0.5);
+
+
+          if (model.value.id) {
+            var li = list.refs[model.value.id];
+            var elLi = li.getDOMNode(),
+              mRect = elMenu.getBoundingClientRect();
+
+            elMenu.scrollTop = elLi.offsetTop - (mRect.height * 0.5);
+          } else {
+
+            console.log('primitives', list.refs);
+          }
+
         }
 
         return;
       }
 
-      input.removeEventListener('keyup', this.__keystrokeNavigation);
+      input.removeEventListener('keydown', this.__keystrokeNavigation);
       document.removeEventListener('click', this.__closeMenu);
       return;
     },
