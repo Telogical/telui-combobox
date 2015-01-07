@@ -18,7 +18,7 @@ function Menu(ui) {
     },
 
     __focusMenu: function focusMenu() {
-      console.log('menu was focused');
+      //console.log('menu was focused');
 
       if (this.refs.list) {
         this.refs.list.getDOMNode().focus();

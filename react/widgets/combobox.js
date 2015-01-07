@@ -203,15 +203,12 @@ function Combobox(ui) {
           menu = this.refs.menu,
           elMenu = menu.getDOMNode(),
           list = menu.refs.list,
-          iRect = input.getBoundingClientRect(),
-          docEl = document.documentElement,
-          scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop || 0,
-          scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft || 0;
+          docEl = document.documentElement;
 
         //positioning
-        elDropdown.style.width = this._toPx(iRect.width);
-        elDropdown.style.top = this._toPx(iRect.top + iRect.height + scrollTop);
-        elDropdown.style.left = this._toPx(iRect.left + scrollLeft);
+        elDropdown.style.width = this._toPx(input.offsetWidth);
+        elDropdown.style.top = this._toPx(input.offsetTop + input.offsetHeight);
+        elDropdown.style.left = this._toPx(input.offsetLeft);
 
         //eventing
         input.addEventListener('keydown', this.__keystrokeNavigation);
@@ -222,8 +219,6 @@ function Combobox(ui) {
         //center on active item, if any
         if (model.value) {
           //handle non Id ones.
-
-
 
           if (model.value.id) {
             var li = list.refs[model.value.id];
