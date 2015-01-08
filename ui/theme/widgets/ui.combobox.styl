@@ -12,6 +12,18 @@ _trannySpeed = $transitionSpeed;
     position:absolute
     z-index: 9999
 
+  .ui-combobox-closeicon-frame
+    overflow: visible;
+    position: relative;
+    width: $line;
+    height: 0px;
+    right: $line-margin;
+    top: $line-margin + $border-width;
+    float: right;
+    bottom: $line-margin;
+    .ui-icon
+      cursor: pointer;
+
 .ui-combobox-input-frame
   margin-right: $brick + ($border-width * 2)
   float:none
@@ -41,5 +53,6 @@ _trannySpeed = $transitionSpeed;
     border-bottom-left-radius: 0px;
 
 
+ui-states('.ui-combobox', '.ui-combobox-closeicon', $ui-states, iLabel, $interactivityTolerance)
 ui-states('.ui-combobox', '.ui-combobox-label', $ui-states, iLabel, $interactivityTolerance)
 ui-states('.ui-combobox', '.ui-combobox-input', $ui-states, iInput, $interactivityTolerance)

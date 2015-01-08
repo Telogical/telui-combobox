@@ -175,7 +175,22 @@ function Combobox(ui) {
     },
 
     __clear: function clear() {
+      var model = this.props;
 
+      this.setState({
+        value: null,
+        inputVal: ''
+      });
+
+      model.scope.$apply(function (scope) {
+        scope.value = null;
+      });
+
+      this
+        .refs
+        .input
+        .getDOMNode()
+        .focus();
     },
     __onInputFocus: function () {
 
@@ -229,28 +244,28 @@ function Combobox(ui) {
       var model = this.props,
         input = this.refs.input.getDOMNode();
 
-      if (this.refs.dropdown) {
-        var elDropdown = this.refs.dropdown.getDOMNode();
-
-        //positioning
-        elDropdown.style.width = this._toPx(input.offsetWidth);
-        elDropdown.style.top = this._toPx(input.offsetTop + input.offsetHeight);
-        elDropdown.style.left = this._toPx(input.offsetLeft);
-
-        //eventing
-        input.addEventListener('keydown', this.__keystrokeNavigation);
-        input.removeEventListener('keydown', this.__openMenu);
-        document.addEventListener('click', this.__closeMenu);
-
-        input.focus();
-        this.__centerMenuValue(model.value);
+      if (!this.refs.dropdown) {
+        input.addEventListener('keydown', this.__openMenu);
+        input.removeEventListener('keydown', this.__keystrokeNavigation);
+        document.removeEventListener('click', this.__closeMenu);
 
         return;
       }
 
-      input.addEventListener('keydown', this.__openMenu);
-      input.removeEventListener('keydown', this.__keystrokeNavigation);
-      document.removeEventListener('click', this.__closeMenu);
+      var elDropdown = this.refs.dropdown.getDOMNode();
+
+      //positioning
+      elDropdown.style.width = this._toPx(input.offsetWidth);
+      elDropdown.style.top = this._toPx(input.offsetTop + input.offsetHeight);
+      elDropdown.style.left = this._toPx(input.offsetLeft);
+
+      //eventing
+      input.addEventListener('keydown', this.__keystrokeNavigation);
+      input.removeEventListener('keydown', this.__openMenu);
+      document.addEventListener('click', this.__closeMenu);
+
+      input.focus();
+      this.__centerMenuValue(model.value);
 
       return;
     },
@@ -292,6 +307,8 @@ function Combobox(ui) {
         }
       }
 
+      this.state.value = this.state.value || {};
+
       var outOfSync = model.value && !(this.__equals(model.value, this.state.value.value));
 
       if (outOfSync) {
@@ -301,9 +318,13 @@ function Combobox(ui) {
       if (model.buttonScope.value) {
         inputVal = this.state.inputVal || '';
       } else {
+
         this.state.inputVal = '';
         inputVal = this.state.value ? this.state.value.label : '';
       }
+
+
+      
 
       //build component
       var frameClasses = {
@@ -337,7 +358,7 @@ function Combobox(ui) {
           className: 'ui-combobox-input ui-state-default',
           disabled: model.disabled,
           ref: 'input',
-          value: inputVal,
+          value: inputVal || '',
           onChange: this.__onInputChange,
           onFocus: this.__onInputFocus,
           onBlur: this.__onInputBlur
@@ -362,7 +383,18 @@ function Combobox(ui) {
         inputRow = [buttonFrame, inputFrame];
 
       if (model.value) {
-        //push in close button
+        var xFrameAttrs = {
+            className: 'ui-combobox-closeicon-frame'
+          },
+          xIconAttrs = {
+            className: 'ui-state-default ui-icon ui-icon-close ui-combobox-closeicon',
+            onClick: this.__clear
+          };
+
+        var xIcon = domx.span(xIconAttrs, ''),
+          xFrame = domx.div(xFrameAttrs, xIcon);
+
+        inputRow = [buttonFrame, xFrame, inputFrame];
       }
       var contentFrame = domx.div(contentFrameAttrs, inputRow);
 
