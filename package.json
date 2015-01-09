@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core#develop-1.1",
+    "TelUI-Validate": "git+ssh://git@github.com:Telogical/TelUI-Validate.git#develop-1.1",
     "TelUI-Form": "git+ssh://git@github.com:Telogical/TelUI-Form#develop-1.3-combo-text",
     "partialify": "*",
-    "react": "0.11.x" 
+    "react": "0.11.x"
   },
   "devDependencies": {
     "lodash": "*",

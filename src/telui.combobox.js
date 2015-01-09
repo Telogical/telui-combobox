@@ -1,13 +1,15 @@
 var React = require('react/addons');
 require('TelUI-Core');
+require('TelUI-Validate');
+
 var TelogicalUi = angular.module('TelUI');
 var UI = require('../react/telui');
 var _ = require('lodash');
 
 TelogicalUi
   .directive('teluiCombobox', [
-
-    function reactComboboxDirective() {
+    'TelUIValidate',
+    function reactComboboxDirective(TelUIValidate) {
       'use strict';
 
       return {
@@ -36,19 +38,12 @@ TelogicalUi
 
           scope.buttonScope = scope.$new(true);
           scope.buttonScope.value = scope.open || false;
-
           scope.menuScope = scope.$new(true);
           scope.menuScope.value = scope.value;
 
           function render(newValue, oldValue) {
 
-
-            function toObject(d) {
-              return {
-                label: d,
-                value: d
-              };
-            }
+            TelUIValidate.validate(scope);
 
             if (typeof scope.text === 'undefined') {
               scope.text = true;
@@ -77,13 +72,6 @@ TelogicalUi
               maxHeight: scope.maxHeight || 'auto',
               labelProp: scope.labelProp || 'label'
             };
-
-//            if (model.data.length && !(typeof model.data[0] === 'object')) {
-//              model.data = model.data.map(toObject);
-//              model.labelProp = 'label';
-//              console.warn('you should be using a list of objects, rather than primitives for', model.id);
-//            }
-
 
             React.renderComponent(UI.Combobox(model), $el[0]);
           }
