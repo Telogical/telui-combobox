@@ -277,6 +277,7 @@ function Combobox(ui) {
         model = this.props,
         row = 'w-12 w-alpha w-omega',
         key = model.id,
+        isClearable = model.clearable,
         inputVal;
 
       //templating
@@ -383,18 +384,24 @@ function Combobox(ui) {
         inputRow = [buttonFrame, inputFrame];
 
       if (model.value) {
-        var xFrameAttrs = {
-            className: 'ui-combobox-closeicon-frame'
-          },
-          xIconAttrs = {
-            className: 'ui-state-default ui-icon ui-icon-close ui-combobox-closeicon',
-            onClick: this.__clear
-          };
+        inputRow = [buttonFrame];
 
-        var xIcon = domx.span(xIconAttrs, ''),
-          xFrame = domx.div(xFrameAttrs, xIcon);
+        if(isClearable) {
+          var xFrameAttrs = {
+              className: 'ui-combobox-closeicon-frame'
+            },
+            xIconAttrs = {
+              className: 'ui-state-default ui-icon ui-icon-close ui-combobox-closeicon',
+              onClick: this.__clear
+            };
 
-        inputRow = [buttonFrame, xFrame, inputFrame];
+          var xIcon = domx.span(xIconAttrs, ''),
+            xFrame = domx.div(xFrameAttrs, xIcon);
+
+          inputRow.push(xFrame);
+        }
+
+        inputRow.push(inputFrame);
       }
       var contentFrame = domx.div(contentFrameAttrs, inputRow);
 

@@ -24,6 +24,7 @@ TelogicalUi
         cssClass: '@',
         text: '=?',
         state: '@',
+        clearable: '=?',
         maxHeight: '@',
         labelProp: '@'
       };
@@ -42,6 +43,10 @@ TelogicalUi
           scope.buttonScope.value = scope.open || false;
           scope.menuScope = scope.$new(true);
           scope.menuScope.value = scope.value;
+
+          scope.clearable = _.isUndefined(scope.clearable) ?
+            false :
+            scope.clearable;
 
           function render(newValue, oldValue) {
 
@@ -70,6 +75,7 @@ TelogicalUi
               click: scope.click,
               value: scope.value,
               data: scope.data,
+              clearable: scope.clearable,
               uiState: scope.state || 'default',
               maxHeight: scope.maxHeight || 'auto',
               labelProp: scope.labelProp || 'label'
