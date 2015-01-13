@@ -12,24 +12,26 @@ TelogicalUi
     function reactComboboxDirective(TelUIValidate) {
       'use strict';
 
+      var scopeDefinition = {
+        id: '@',
+        value: '=?',
+        data: '=?',
+        label: '@',
+        disabled: '=',
+        iconPrimary: '@',
+        iconSecondary: '@',
+        click: '&?',
+        cssClass: '@',
+        text: '=?',
+        state: '@',
+        maxHeight: '@',
+        labelProp: '@'
+      };
+
       return {
         restrict: 'E',
         replace: true,
-        scope: {
-          id: '@',
-          value: '=?',
-          data: '=?',
-          label: '@',
-          disabled: '=',
-          iconPrimary: '@',
-          iconSecondary: '@',
-          click: '&?',
-          cssClass: '@',
-          text: '=?',
-          state: '@',
-          maxHeight: '@',
-          labelProp: '@'
-        },
+        scope: TelUIValidate.extend(scopeDefinition),
         template: '<div class="waffles"></div>',
         link: function link(scope, $el, attrs) {
           var id = scope.id ?
@@ -43,7 +45,7 @@ TelogicalUi
 
           function render(newValue, oldValue) {
 
-            TelUIValidate.validate(scope);
+            TelUIValidate.validate(scope, attrs);
 
             if (typeof scope.text === 'undefined') {
               scope.text = true;
@@ -68,7 +70,7 @@ TelogicalUi
               click: scope.click,
               value: scope.value,
               data: scope.data,
-              uiState: scope.state || '',
+              uiState: scope.state || 'default',
               maxHeight: scope.maxHeight || 'auto',
               labelProp: scope.labelProp || 'label'
             };
