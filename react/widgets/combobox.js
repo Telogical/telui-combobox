@@ -240,24 +240,43 @@ function Combobox(ui) {
       }
 
     },
+
+    _positionMenu: function positionMenu(elDropdown, input, fitsOnScreen) {
+      elDropdown.style.left = this._toPx(input.offsetLeft);
+      elDropdown.style.width = this._toPx(input.offsetWidth);
+      elDropdown.style.top = fitsOnScreen ?
+        this._toPx(input.offsetTop + input.offsetHeight) :
+        this._toPx(input.offsetTop - elDropdown.offsetHeight);
+    },
     componentDidUpdate: function componentDidUpdate() {
       var model = this.props,
-        input = this.refs.input.getDOMNode();
+        input = this.refs.input.getDOMNode(),
+        dropdown = this.refs.dropdown;
 
-      if (!this.refs.dropdown) {
+      if (!dropdown) {
         input.addEventListener('keydown', this.__openMenu);
         input.removeEventListener('keydown', this.__keystrokeNavigation);
         document.removeEventListener('click', this.__closeMenu);
-
         return;
       }
 
-      var elDropdown = this.refs.dropdown.getDOMNode();
+      var elDropdown = dropdown.getDOMNode(),
+        elMenu = this.refs.menu.getDOMNode();
+
+      var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
+        inputTop = input.getBoundingClientRect().top,
+        elDropdownHeight = elDropdown.offsetHeight;
+
+      var fitsOnScreen = viewportHeight > (inputTop + input.offsetHeight + elDropdownHeight);
 
       //positioning
-      elDropdown.style.width = this._toPx(input.offsetWidth);
-      elDropdown.style.top = this._toPx(input.offsetTop + input.offsetHeight);
-      elDropdown.style.left = this._toPx(input.offsetLeft);
+      this._positionMenu(elDropdown, input, fitsOnScreen);
+
+      var clearSide = fitsOnScreen ?
+        'borderTopWidth' :
+        'borderBottomWidth';
+      elMenu.style[clearSide] = '0'; //clear the menu side so it looks liek its coming out of the box.
+
 
       //eventing
       input.addEventListener('keydown', this.__keystrokeNavigation);
@@ -324,9 +343,6 @@ function Combobox(ui) {
         inputVal = this.state.value ? this.state.value.label : '';
       }
 
-
-      
-
       //build component
       var frameClasses = {
         'waffles': true,
@@ -386,7 +402,7 @@ function Combobox(ui) {
       if (model.value) {
         inputRow = [buttonFrame];
 
-        if(isClearable) {
+        if (isClearable) {
           var xFrameAttrs = {
               className: 'ui-combobox-closeicon-frame'
             },
