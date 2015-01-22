@@ -276,8 +276,6 @@ function Combobox(ui) {
       var fitsOnScreen = viewportHeight > (inputBlock + elDropdownHeight),
         bottomHalf = inputBlock > (viewportHeight * 0.5);
 
-      console.log('bottomHalf', bottomHalf);
-
       //positioning
       this._positionMenu(elDropdown, input, fitsOnScreen, bottomHalf);
 
