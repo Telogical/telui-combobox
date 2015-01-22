@@ -241,12 +241,16 @@ function Combobox(ui) {
 
     },
 
-    _positionMenu: function positionMenu(elDropdown, input, fitsOnScreen) {
+    _positionMenu: function positionMenu(elDropdown, input, fitsOnScreen, bottomHalf) {
+      //possibly extend this to only look if the scrollbar is halfway down the page.
+      var goUp = !fitsOnScreen && bottomHalf;
+      
       elDropdown.style.left = this._toPx(input.offsetLeft);
       elDropdown.style.width = this._toPx(input.offsetWidth);
-      elDropdown.style.top = fitsOnScreen ?
-        this._toPx(input.offsetTop + input.offsetHeight) :
-        this._toPx(input.offsetTop - elDropdown.offsetHeight);
+      
+      elDropdown.style.top = goUp ?
+        this._toPx(input.offsetTop - elDropdown.offsetHeight):
+        this._toPx(input.offsetTop + input.offsetHeight);
     },
     componentDidUpdate: function componentDidUpdate() {
       var model = this.props,
@@ -265,12 +269,16 @@ function Combobox(ui) {
 
       var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         inputTop = input.getBoundingClientRect().top,
-        elDropdownHeight = elDropdown.offsetHeight;
+        elDropdownHeight = elDropdown.offsetHeight,
+          inputBlock = inputTop + input.offsetHeight;
 
-      var fitsOnScreen = viewportHeight > (inputTop + input.offsetHeight + elDropdownHeight);
+      var fitsOnScreen = viewportHeight > (inputBlock + elDropdownHeight),
+          bottomHalf = inputBlock > (viewportHeight * 0.5);
+      
+      console.log('bottomHalf',bottomHalf);
 
       //positioning
-      this._positionMenu(elDropdown, input, fitsOnScreen);
+      this._positionMenu(elDropdown, input, fitsOnScreen, bottomHalf);
 
       var clearSide = fitsOnScreen ?
         'borderTopWidth' :
