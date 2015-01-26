@@ -1,11 +1,11 @@
 {
-  "name": "TelUI-ComboBox",
-  "version": "0.0.9",
+  "name": "@telogical/telui-combobox",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
-    "TelUI-Core": "git+ssh://git@github.com:Telogical/TelUI-Core#develop-1.1",
-    "TelUI-Validate": "git+ssh://git@github.com:Telogical/TelUI-Validate.git#develop-1.1",
-    "TelUI-Form": "git+ssh://git@github.com:Telogical/TelUI-Form#develop-1.3-combo-text",
+    "@telogical/telui-core": "1.0.x",
+    "@telogical/telui-validate": "1.0.x",
+    "@telogical/telui-form": "1.0.x",
     "partialify": "*",
     "react": "0.11.x"
   },
@@ -15,8 +15,6 @@
     "browserify-shim": "3.x.x"
   },
   "browserify": {
-    "transform": [
-            "partialify"
-        ]
+    "transform": ["partialify"]
   }
 }
