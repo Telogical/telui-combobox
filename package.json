@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "lodash": "*",
-    "browserify": "3.46.0",
+    "browserify": "3.46.x",
     "browserify-shim": "3.x.x"
   },
   "browserify": {

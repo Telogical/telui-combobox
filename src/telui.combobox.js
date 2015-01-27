@@ -1,6 +1,6 @@
 var React = require('react/addons');
-require('TelUI-Core');
-require('TelUI-Validate');
+require('@telogical/telui-core');
+require('@telogical/telui-validate');
 
 var TelogicalUi = angular.module('TelUI');
 var UI = require('../react/telui');

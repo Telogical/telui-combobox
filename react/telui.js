@@ -1,10 +1,9 @@
 //this file decorates the global ui object with all widgets in this package
 
-global.UI = require('TelUI-Form');
+global.UI = require('@telogical/telui-form');
 
 
 global.UI.Mixins.Dropdown = require('./mixins/dropdown')(global.UI);
-
 
 global.UI.Appearances.menuitem = require('./appearances/menuitem')(global.UI);
 
