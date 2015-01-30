@@ -1,0 +1,29 @@
+{
+  "name": "@telogical/telui-combobox",
+  "version": "1.1.0",
+  "description": "A combobox, which is a search enabled select box, built with the telui component system",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Telogical/telui-combobox.git"
+  },
+  "keywords": [
+    "combobox",
+    "telui",
+    "Telogical",
+    "angular",
+    "react",
+    "lodash",
+    "telui-menu",
+    "telui-radio"
+  ],
+  "author": "jharlin@telogical.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Telogical/telui-combobox/issues"
+  },
+  "homepage": "https://github.com/Telogical/telui-combobox"
+}
