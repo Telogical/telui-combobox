@@ -1,6 +1,3 @@
-var React = require('react/addons');
-var _ = require('lodash');
-
 function Combobox(ui) {
   'use strict';
   return React.createClass({
@@ -245,13 +242,13 @@ function Combobox(ui) {
       //possibly extend this to only look if the scrollbar is halfway down the page.
       var goUp = !fitsOnScreen && bottomHalf,
         inputOffset = this.__offset(input);
-      
+
       elDropdown.style.left = this._toPx(inputOffset.left);
       elDropdown.style.width = this._toPx(inputOffset.width);
       elDropdown.style.top = goUp ?
         this._toPx(inputOffset.top - inputOffset.height) :
         this._toPx(inputOffset.top + inputOffset.height);
-      
+
     },
     componentDidUpdate: function componentDidUpdate() {
       var model = this.props,
