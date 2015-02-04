@@ -26,9 +26,10 @@
     "url": "https://github.com/Telogical/telui-combobox/issues"
   },
   "dependencies": {
-    "@telogical/telui-core": "1.x.x",
     "@telogical/telui-validate": "0.x.x",
     "@telogical/telui-text": "1.x.x",
+    "@telogical/telui-checkbox": "1.x.x",
+    "@telogical/telui-button": "1.x.x",
     "@telogical/telui-menu": "1.x.x"
   },
   "homepage": "https://github.com/Telogical/telui-combobox"
