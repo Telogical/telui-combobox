@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/Telogical/telui-combobox/issues"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@telogical/telui-validate": "0.x.x",
     "@telogical/telui-text": "1.x.x",
     "@telogical/telui-checkbox": "1.x.x",
