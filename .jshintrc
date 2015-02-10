@@ -21,11 +21,9 @@
     "predef": [
       "describe",
       "angular",
-      "React",
       "it",
       "document",
       "window",
-      "_",
       "require"
     ]
 }

@@ -1,6 +1,5 @@
-//global.UI = global.UI || require('@telogical/telui-core');
-require('@telogical/telui-core');
+var TelUI = require('@telogical/telui-core');
 
-global.UI.Combobox = require('./widgets/combobox')(global.UI);
+TelUI.Combobox = require('./widgets/combobox')(TelUI);
 
-module.exports = global.UI;
+module.exports = TelUI;

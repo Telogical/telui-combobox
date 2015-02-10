@@ -1,8 +1,11 @@
 require('@telogical/telui-validate');
-var TelogicalUi = angular.module('TelUI'),
-  UI = require('../react/telui');
 
-TelogicalUi
+var UI = require('../react/telui'),
+  React = UI.Core.React,
+  _ = UI.Core._;
+
+angular
+  .module('TelUI')
   .directive('teluiCombobox', [
     'TelUIValidate',
     function reactComboboxDirective(TelUIValidate) {
@@ -10,7 +13,7 @@ TelogicalUi
 
 
       function link(scope, $el, attrs) {
-        
+
         var id = scope.id ?
           scope.id :
           'combobox_' + Math.round(Math.random() * 9999);
@@ -59,7 +62,7 @@ TelogicalUi
 
           React.renderComponent(UI.Combobox(model), $el[0]);
         }
-        
+
         scope.$watchCollection(
           '[value, data, label, labelProp,iconPrimary, iconSecondary, disabled, cssClass, text, click, state, buttonScope.value, menuScope.value, maxHeight]',
           render);

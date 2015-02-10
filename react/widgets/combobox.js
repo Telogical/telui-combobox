@@ -1,5 +1,9 @@
 function Combobox(ui) {
   'use strict';
+
+  var React = ui.Core.React,
+    _ = ui.Core._;
+
   return React.createClass({
     displayName: 'Combobox',
     mixins: [ui.Mixins.Widget, ui.Mixins.Appearance],
