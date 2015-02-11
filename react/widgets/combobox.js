@@ -19,7 +19,7 @@ function Combobox(ui) {
 
     __keystrokeNavigation: function keystrokeNavigation(eve) {
 
-      var eve = eve || window.event;
+      var eve = (eve || window.event);
 
       var up = eve.which === 38,
         down = eve.which === 40,
@@ -242,26 +242,28 @@ function Combobox(ui) {
 
     },
 
-    _positionMenu: function positionMenu(elDropdown, input, fitsOnScreen, bottomHalf) {
-      //possibly extend this to only look if the scrollbar is halfway down the page.
+    _positionMenu: function positionMenu(elDropdown, elInput, fitsOnScreen, bottomHalf) {
+
       var goUp = !fitsOnScreen && bottomHalf,
-        inputOffset = this.__offset(input);
+        inputOffset = this.__offset(elInput),
+        dropDownOffset = this.__offset(elDropdown);
 
       elDropdown.style.left = this._toPx(inputOffset.left);
       elDropdown.style.width = this._toPx(inputOffset.width);
+
       elDropdown.style.top = goUp ?
-        this._toPx(inputOffset.top - inputOffset.height) :
+        this._toPx(inputOffset.top - dropDownOffset.height) :
         this._toPx(inputOffset.top + inputOffset.height);
 
     },
     componentDidUpdate: function componentDidUpdate() {
       var model = this.props,
-        input = this.refs.input.getDOMNode(),
+        elInput = this.refs.input.getDOMNode(),
         dropdown = this.refs.dropdown;
 
       if (!dropdown) {
-        input.addEventListener('keydown', this.__openMenu);
-        input.removeEventListener('keydown', this.__keystrokeNavigation);
+        elInput.addEventListener('keydown', this.__openMenu);
+        elInput.removeEventListener('keydown', this.__keystrokeNavigation);
         document.removeEventListener('click', this.__closeMenu);
         return;
       }
@@ -270,15 +272,15 @@ function Combobox(ui) {
         elMenu = this.refs.menu.getDOMNode();
 
       var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
-        inputTop = input.getBoundingClientRect().top,
+        inputTop = elInput.getBoundingClientRect().top,
         elDropdownHeight = elDropdown.offsetHeight,
-        inputBlock = inputTop + input.offsetHeight;
+        inputBlock = inputTop + elInput.offsetHeight;
 
       var fitsOnScreen = viewportHeight > (inputBlock + elDropdownHeight),
         bottomHalf = inputBlock > (viewportHeight * 0.5);
 
       //positioning
-      this._positionMenu(elDropdown, input, fitsOnScreen, bottomHalf);
+      this._positionMenu(elDropdown, elInput, fitsOnScreen, bottomHalf);
 
       var clearSide = fitsOnScreen ?
         'borderTopWidth' :
@@ -287,11 +289,11 @@ function Combobox(ui) {
 
 
       //eventing
-      input.addEventListener('keydown', this.__keystrokeNavigation);
-      input.removeEventListener('keydown', this.__openMenu);
+      elInput.addEventListener('keydown', this.__keystrokeNavigation);
+      elInput.removeEventListener('keydown', this.__openMenu);
       document.addEventListener('click', this.__closeMenu);
 
-      input.focus();
+      elInput.focus();
       this.__centerMenuValue(model.value);
 
       return;
