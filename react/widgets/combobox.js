@@ -252,7 +252,7 @@ function Combobox(ui) {
       elDropdown.style.width = this._toPx(inputOffset.width);
 
       elDropdown.style.top = goUp ?
-        this._toPx(inputOffset.top - dropDownOffset.height) :
+        this._toPx(inputOffset.top - inputOffset.height) :
         this._toPx(inputOffset.top + inputOffset.height);
 
     },
