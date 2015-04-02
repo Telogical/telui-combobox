@@ -250,10 +250,13 @@ function Combobox(ui) {
 
       elDropdown.style.left = this._toPx(inputOffset.left);
       elDropdown.style.width = this._toPx(inputOffset.width);
-
+      
+      var upwards =inputOffset.top - dropDownOffset.height,
+          downwards = inputOffset.top + inputOffset.height;
+      
       elDropdown.style.top = goUp ?
-        this._toPx(inputOffset.top + dropDownOffset.height) :
-        this._toPx(inputOffset.top - inputOffset.height);
+        this._toPx(upwards) :
+        this._toPx(downwards);
 
     },
     componentDidUpdate: function componentDidUpdate() {
