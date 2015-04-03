@@ -241,22 +241,17 @@ function Combobox(ui) {
       }
 
     },
-
     _positionMenu: function positionMenu(elDropdown, elInput, fitsOnScreen, bottomHalf) {
 
       var goUp = !fitsOnScreen && bottomHalf,
-        inputOffset = this.__offset(elInput),
-        dropDownOffset = this.__offset(elDropdown);
+        inputOffset = this.__offset(elInput);
 
       elDropdown.style.left = this._toPx(inputOffset.left);
       elDropdown.style.width = this._toPx(inputOffset.width);
-      
-      var upwards =inputOffset.top - dropDownOffset.height,
-          downwards = inputOffset.top + inputOffset.height;
-      
+
       elDropdown.style.top = goUp ?
-        this._toPx(upwards) :
-        this._toPx(downwards);
+        this._toPx(inputOffset.top - this.__offset(elDropdown).height) :
+        this._toPx(inputOffset.top + inputOffset.height);
 
     },
     componentDidUpdate: function componentDidUpdate() {
