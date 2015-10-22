@@ -2820,6 +2820,294 @@ authors: Jesse Harlin, Joe Hare
   filter: alpha(opacity=50);
   cursor: default;
 }
+/*widget*/
+.ui-radio {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  line-height: normal;
+  margin: 0 auto;
+  cursor: pointer;
+  vertical-align: middle;
+  text-align: center;
+  overflow: visible;
+}
+.ui-appearance-radio {
+  line-height: 25px;
+  font-size: 16.068px;
+}
+.ui-appearance-radio .ui-appearance-radio-label-frame.w-auto {
+  margin-left: 26px /*Worldspace Brick Size. Change this to anything.*/;
+  width: auto;
+}
+.ui-appearance-radio .ui-appearance-radio-label-frame.w-auto .ui-appearance-radio-label {
+  text-align: left;
+}
+.ui-appearance-radio .ui-appearance-radio-sprite-frame {
+  width: 26px /*Worldspace Brick Size. Change this to anything.*/;
+  height: 26px /*Worldspace Brick Size. Change this to anything.*/;
+  float: left;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.ui-appearance-radio .ui-appearance-radio-sprite-frame .ui-appearance-radio-sprite {
+  display: block;
+  width: 16.068px;
+  height: 16.068px;
+  border-radius: 4px;
+  margin: 4.465999999999999px auto;
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-label.ui-state-default {
+  color: #000;
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-label.ui-state-disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-label:disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-label.ui-state-default {
+  color: #9d2b20;
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-label.ui-state-disabled {
+  color: #9d2b20;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-label:disabled {
+  color: #9d2b20;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-label.ui-state-default {
+  color: #927914;
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-label.ui-state-disabled {
+  color: #927914;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-label:disabled {
+  color: #927914;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-label.ui-state-default {
+  color: #267d4b;
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-label.ui-state-disabled {
+  color: #267d4b;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-label:disabled {
+  color: #267d4b;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-label.ui-state-default {
+  color: #24638c;
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-label.ui-state-disabled {
+  color: #24638c;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-label:disabled {
+  color: #24638c;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-default {
+  color: #000;
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-hover {
+  color: #c9ccce;
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite:hover {
+  color: #c9ccce;
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-active {
+  color: #a5b0b8;
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite:active {
+  color: #a5b0b8;
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite:disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-default {
+  color: #9d2b20;
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-hover {
+  color: #d17b73;
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite:hover {
+  color: #d17b73;
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-active {
+  color: #fd1800;
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite:active {
+  color: #fd1800;
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite:disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-default {
+  color: #927914;
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-hover {
+  color: #d1b855;
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite:hover {
+  color: #d1b855;
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-active {
+  color: #e6c900;
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite:active {
+  color: #e6c900;
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite:disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-default {
+  color: #267d4b;
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-hover {
+  color: #63be89;
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite:hover {
+  color: #63be89;
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-active {
+  color: #0dd461;
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite:active {
+  color: #0dd461;
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite:disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-default {
+  color: #24638c;
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-hover {
+  color: #6ba2c8;
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite:hover {
+  color: #6ba2c8;
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-active {
+  color: #0392f1;
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite:active {
+  color: #0392f1;
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite:disabled {
+  color: #000;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
 .ui-menu {
   background: rgba(255,255,255,0.85);
   list-style: none;
@@ -3182,293 +3470,103 @@ authors: Jesse Harlin, Joe Hare
   filter: alpha(opacity=50);
   cursor: default;
 }
-/*widget*/
-.ui-radio {
-  width: 100%;
-  display: inline-block;
-  position: relative;
-  padding: 0;
-  line-height: normal;
-  margin: 0 auto;
-  cursor: pointer;
-  vertical-align: middle;
-  text-align: center;
+.ui-tooltip-content strong {
+  font-weight: bold;
+}
+.ui-tooltip-content em {
+  font-style: italic;
+}
+.ui-tooltip-right {
+  color: #222;
+  position: absolute;
+  z-index: 999;
+  width: 0;
+  height: 0;
   overflow: visible;
 }
-.ui-appearance-radio {
-  line-height: 25px;
-  font-size: 16.068px;
+.ui-tooltip-right .ui-tooltip-content {
+  box-shadow: -2px 2px 4px 1px rgba(0,0,0,0.2);
+  position: relative;
+  background: #fff;
+  border: 1px solid #bdc3c7;
+  width: 350px;
+  height: 180px;
+  top: -100px;
+  left: 36px;
+  padding: 13px;
 }
-.ui-appearance-radio .ui-appearance-radio-label-frame.w-auto {
-  margin-left: 26px /*Worldspace Brick Size. Change this to anything.*/;
-  width: auto;
+.ui-tooltip-right .ui-tooltip-content ul li {
+  height: auto;
+  padding: 6.5px;
 }
-.ui-appearance-radio .ui-appearance-radio-label-frame.w-auto .ui-appearance-radio-label {
-  text-align: left;
+.ui-tooltip-right .ui-tooltip-content:after,
+.ui-tooltip-right .ui-tooltip-content:before {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
-.ui-appearance-radio .ui-appearance-radio-sprite-frame {
-  width: 26px /*Worldspace Brick Size. Change this to anything.*/;
-  height: 26px /*Worldspace Brick Size. Change this to anything.*/;
-  float: left;
-  margin-left: 0px;
-  margin-right: 0px;
+.ui-tooltip-right .ui-tooltip-content:after {
+  border-color: rgba(255,255,255,0);
+  border-right-color: #fff;
+  border-width: 17px;
+  margin-top: -17px;
 }
-.ui-appearance-radio .ui-appearance-radio-sprite-frame .ui-appearance-radio-sprite {
-  display: block;
-  width: 16.068px;
-  height: 16.068px;
-  border-radius: 4px;
-  margin: 4.465999999999999px auto;
+.ui-tooltip-right .ui-tooltip-content:before {
+  border-color: rgba(165,176,184,0);
+  border-right-color: #bdc3c7;
+  border-width: 18px;
+  margin-top: -18px;
 }
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-label.ui-state-default {
-  color: #000;
+.ui-tooltip-left {
+  color: #222;
+  position: absolute;
+  z-index: 999;
+  width: 0;
+  height: 0;
+  overflow: visible;
 }
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-label.ui-state-disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
+.ui-tooltip-left .ui-tooltip-content {
+  box-shadow: -2px 2px 4px 1px rgba(0,0,0,0.2);
+  position: relative;
+  background: #fff;
+  border: 1px solid #bdc3c7;
+  width: 350px;
+  height: 180px;
+  top: -100px;
+  left: 36px;
+  padding: 13px;
 }
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-label:disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
+.ui-tooltip-left .ui-tooltip-content ul li {
+  height: auto;
+  padding: 6.5px;
 }
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-label.ui-state-default {
-  color: #9d2b20;
+.ui-tooltip-left .ui-tooltip-content:after,
+.ui-tooltip-left .ui-tooltip-content:before {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-label.ui-state-disabled {
-  color: #9d2b20;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
+.ui-tooltip-left .ui-tooltip-content:after {
+  border-color: rgba(255,255,255,0);
+  border-left-color: #fff;
+  border-width: 17px;
+  margin-top: -17px;
 }
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-label:disabled {
-  color: #9d2b20;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-label.ui-state-default {
-  color: #927914;
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-label.ui-state-disabled {
-  color: #927914;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-label:disabled {
-  color: #927914;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-label.ui-state-default {
-  color: #267d4b;
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-label.ui-state-disabled {
-  color: #267d4b;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-label:disabled {
-  color: #267d4b;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-label.ui-state-default {
-  color: #24638c;
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-label.ui-state-disabled {
-  color: #24638c;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-label:disabled {
-  color: #24638c;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-default {
-  color: #000;
-}
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-hover {
-  color: #c9ccce;
-}
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite:hover {
-  color: #c9ccce;
-}
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-active {
-  color: #a5b0b8;
-}
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite:active {
-  color: #a5b0b8;
-}
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite.ui-state-disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-default .ui-appearance-radio-sprite:disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-default {
-  color: #9d2b20;
-}
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-hover {
-  color: #d17b73;
-}
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite:hover {
-  color: #d17b73;
-}
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-active {
-  color: #fd1800;
-}
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite:active {
-  color: #fd1800;
-}
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite.ui-state-disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-error .ui-appearance-radio-sprite:disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-default {
-  color: #927914;
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-hover {
-  color: #d1b855;
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite:hover {
-  color: #d1b855;
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-active {
-  color: #e6c900;
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite:active {
-  color: #e6c900;
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite.ui-state-disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-highlight .ui-appearance-radio-sprite:disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-default {
-  color: #267d4b;
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-hover {
-  color: #63be89;
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite:hover {
-  color: #63be89;
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-active {
-  color: #0dd461;
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite:active {
-  color: #0dd461;
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite.ui-state-disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-success .ui-appearance-radio-sprite:disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-default {
-  color: #24638c;
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-hover {
-  color: #6ba2c8;
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite:hover {
-  color: #6ba2c8;
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-active {
-  color: #0392f1;
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite:active {
-  color: #0392f1;
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite.ui-state-disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-.ui-appearance-radio.ui-state-advantage .ui-appearance-radio-sprite:disabled {
-  color: #000;
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
+.ui-tooltip-left .ui-tooltip-content:before {
+  border-color: rgba(165,176,184,0);
+  border-left-color: #bdc3c7;
+  border-width: 18px;
+  margin-top: -18px;
 }
 .ui-text .ui-text-label {
   min-height: 26px /*Worldspace Brick Size. Change this to anything.*/;
@@ -4050,104 +4148,6 @@ authors: Jesse Harlin, Joe Hare
   opacity: 0.5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
-}
-.ui-tooltip-content strong {
-  font-weight: bold;
-}
-.ui-tooltip-content em {
-  font-style: italic;
-}
-.ui-tooltip-right {
-  color: #222;
-  position: absolute;
-  z-index: 999;
-  width: 0;
-  height: 0;
-  overflow: visible;
-}
-.ui-tooltip-right .ui-tooltip-content {
-  box-shadow: -2px 2px 4px 1px rgba(0,0,0,0.2);
-  position: relative;
-  background: #fff;
-  border: 1px solid #bdc3c7;
-  width: 350px;
-  height: 180px;
-  top: -100px;
-  left: 36px;
-  padding: 13px;
-}
-.ui-tooltip-right .ui-tooltip-content ul li {
-  height: auto;
-  padding: 6.5px;
-}
-.ui-tooltip-right .ui-tooltip-content:after,
-.ui-tooltip-right .ui-tooltip-content:before {
-  right: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-.ui-tooltip-right .ui-tooltip-content:after {
-  border-color: rgba(255,255,255,0);
-  border-right-color: #fff;
-  border-width: 17px;
-  margin-top: -17px;
-}
-.ui-tooltip-right .ui-tooltip-content:before {
-  border-color: rgba(165,176,184,0);
-  border-right-color: #bdc3c7;
-  border-width: 18px;
-  margin-top: -18px;
-}
-.ui-tooltip-left {
-  color: #222;
-  position: absolute;
-  z-index: 999;
-  width: 0;
-  height: 0;
-  overflow: visible;
-}
-.ui-tooltip-left .ui-tooltip-content {
-  box-shadow: -2px 2px 4px 1px rgba(0,0,0,0.2);
-  position: relative;
-  background: #fff;
-  border: 1px solid #bdc3c7;
-  width: 350px;
-  height: 180px;
-  top: -100px;
-  left: 36px;
-  padding: 13px;
-}
-.ui-tooltip-left .ui-tooltip-content ul li {
-  height: auto;
-  padding: 6.5px;
-}
-.ui-tooltip-left .ui-tooltip-content:after,
-.ui-tooltip-left .ui-tooltip-content:before {
-  left: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-.ui-tooltip-left .ui-tooltip-content:after {
-  border-color: rgba(255,255,255,0);
-  border-left-color: #fff;
-  border-width: 17px;
-  margin-top: -17px;
-}
-.ui-tooltip-left .ui-tooltip-content:before {
-  border-color: rgba(165,176,184,0);
-  border-left-color: #bdc3c7;
-  border-width: 18px;
-  margin-top: -18px;
 }
 .ui-combobox .ui-combobox-label {
   min-height: 26px /*Worldspace Brick Size. Change this to anything.*/;

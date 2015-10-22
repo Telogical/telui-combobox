@@ -1,4 +1,5 @@
 require('@telogical/telui-validate');
+var uuid = require('uuid');
 
 var UI = require('../react/telui'),
   React = UI.Core.React,
@@ -15,8 +16,7 @@ angular
       function link(scope, $el, attrs) {
 
         var id = scope.id ?
-          scope.id :
-          'combobox_' + Math.round(Math.random() * 9999);
+          scope.id : 'combobox_' + uuid.v1();
 
         scope.buttonScope = scope.$new(true);
         scope.buttonScope.value = scope.open || false;

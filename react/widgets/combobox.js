@@ -4,6 +4,9 @@ function Combobox(ui) {
   var React = ui.Core.React,
     _ = ui.Core._;
 
+
+  var debounceInput;
+
   return React.createClass({
     displayName: 'Combobox',
     mixins: [ui.Mixins.Widget, ui.Mixins.Appearance],
@@ -168,9 +171,9 @@ function Combobox(ui) {
       model.buttonScope.$apply();
     },
     __onInputChange: function (eve) {
-      var model = this.props;
-
-      this.setState({
+      var model = this.props,
+        cbox = this;
+      cbox.setState({
         inputVal: eve.target.value || ''
       });
     },
